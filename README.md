@@ -90,3 +90,11 @@ key("mykey")
 #> $node$createdIndex
 #> [1] 3
 ```
+
+## Meta
+
+* Please report any issues or bugs](https://github.com/ropensci/etseed/issues).
+* License: MIT
+* Citation: execute `citation(package = 'etseed')`
+
+[![ropensci_footer](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
