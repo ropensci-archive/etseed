@@ -1,0 +1,15 @@
+Package: etseed
+Title: etcd R client
+Description: etcd R client
+Version: 0.0.1.99
+Date: 2015-02-05
+License: MIT + file LICENSE
+URL: https://github.com/sckott/etseed
+BugReports: https://github.com/sckott/etseed/issues
+Authors@R: c(person("Scott", "Chamberlain", role = c("aut", "cre"),
+    email = "myrmecocystus@gmail.com"))
+License: MIT + file LICENSE
+LazyData: true
+Imports:
+    httr,
+    jsonlite

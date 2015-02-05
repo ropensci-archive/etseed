@@ -1,0 +1,55 @@
+etseed
+========
+
+```{r echo=FALSE}
+knitr::opts_chunk$set(
+  warning = FALSE,
+  message = FALSE,
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+__etcd R client__
+
+## Installation
+
+Install `etseed`
+
+```{r eval=FALSE}
+install.packages("devtools")
+devtools::install_github("sckott/etseed")
+```
+
+```{r}
+library("etseed")
+```
+
+## Start etcd
+
+at the command line on OSX
+
+```sh
+brew install etcd
+etcd
+```
+
+done.
+
+## Get version
+
+```{r}
+version()
+```
+
+## List keys
+
+```{r}
+keys()
+```
+
+## List a key
+
+```{r}
+key("mykey")
+```
