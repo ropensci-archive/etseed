@@ -36,7 +36,7 @@ done.
 
 ```r
 version()
-#> Error in eval(expr, envir, enclos): could not find function "version"
+#> [1] "etcd 0.4.6"
 ```
 
 ## List keys

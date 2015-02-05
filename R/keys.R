@@ -17,11 +17,11 @@
 #' @export
 #' @rdname keys
 keys <- function(...) {
-  etseed_GET(sprintf("%s%s/", etcdbase(), "keys"), ...)
+  etcd_parse(etcd_GET(sprintf("%s%s/", etcdbase(), "keys"), ...))
 }
 
 #' @export
 #' @rdname keys
 key <- function(key, ...) {
-  etseed_GET(sprintf("%s%s/%s/", etcdbase(), "keys", key), ...)
+  etcd_parse(etcd_GET(sprintf("%s%s/%s/", etcdbase(), "keys", key), ...))
 }
