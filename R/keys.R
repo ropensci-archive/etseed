@@ -6,6 +6,10 @@
 #' @param key (character) A key name. Optional.
 #' @param value Any object to store. Required for \code{\link{create}}, \code{\link{update}},
 #' and \code{\link{delete}} functions
+#' @param recursive Whether to do recursive something???
+#' @param sorted Whether to return sorted or not.
+#' @param prevValue (character) Previous value to match against.
+#' @param prevIndex (integer) Previous index to match against.
 #' @param ttl (integer) Seconds after which the key will be removed.
 #' @param ... Further args passed on to \code{\link[httr]{GET}}
 #'

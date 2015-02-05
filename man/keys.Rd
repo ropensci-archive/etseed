@@ -22,6 +22,10 @@ create_inorder(key, value, ttl = NULL, ...)
 delete(key, prevValue = NULL, prevIndex = NULL, ...)
 }
 \arguments{
+\item{recursive}{Whether to do recursive something???}
+
+\item{sorted}{Whether to return sorted or not.}
+
 \item{...}{Further args passed on to \code{\link[httr]{GET}}}
 
 \item{key}{(character) A key name. Optional.}
@@ -30,6 +34,10 @@ delete(key, prevValue = NULL, prevIndex = NULL, ...)
 and \code{\link{delete}} functions}
 
 \item{ttl}{(integer) Seconds after which the key will be removed.}
+
+\item{prevValue}{(character) Previous value to match against.}
+
+\item{prevIndex}{(integer) Previous index to match against.}
 }
 \description{
 List a key or all keys
