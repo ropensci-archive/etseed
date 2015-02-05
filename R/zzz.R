@@ -4,11 +4,11 @@ etcd_GET <- function(url, args, ...){
   content(res, "text")
 }
 
-etcd_PUT <- function(url, value, ttl=NULL, ...){
+etcd_PUT <- function(url, value, ttl=NULL, dir=FALSE, ...){
   if(missing(value)){
     res <- PUT(url, query=list(dir=TRUE), ...)
   } else {
-    res <- PUT(url, body = list(value=value), query=etc(list(ttl=ttl)), ...)
+    res <- PUT(url, body = list(value=value), query=etc(list(ttl=ttl, dir=dir)), ...)
   }
   stop_for_status(res)
   content(res, "text")
@@ -21,7 +21,7 @@ etcd_POST <- function(url, value, ttl=NULL, ...){
 }
 
 etcd_DELETE <- function(url, args, ...){
-  res <- DELETE(url, query=args)
+  res <- DELETE(url, query=args, ...)
   if(res$status_code > 201){
     warn_for_status(res)
     content(res)

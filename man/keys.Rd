@@ -13,13 +13,13 @@ keys(recursive = NULL, sorted = NULL, ...)
 
 key(key, recursive = NULL, sorted = NULL, ...)
 
-create(key, value, ttl = NULL, ...)
+create(key, value = NULL, ttl = NULL, dir = FALSE, ...)
 
 update(key, value, ttl = NULL, ...)
 
 create_inorder(key, value, ttl = NULL, ...)
 
-delete(key, prevValue = NULL, prevIndex = NULL, ...)
+delete(key, prevValue = NULL, prevIndex = NULL, dir = FALSE, ...)
 }
 \arguments{
 \item{recursive}{Whether to do recursive something???}

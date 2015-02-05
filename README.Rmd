@@ -42,11 +42,24 @@ done.
 version()
 ```
 
+## Create a directory
+
+```{r echo=FALSE}
+out <- tryCatch(key("neighbor"), error=function(e) e)
+if(!is(out, "http_error")) delete("neighbor", dir=TRUE)
+```
+
+```{r}
+create("neighbor", dir=TRUE)
+```
+
 ## Create a key
 
 ```{r echo=FALSE}
-delete("mykey")
-delete("stuff")
+out <- tryCatch(key("mykey"), error=function(e) e)
+if(!is(out, "http_error")) delete("mykey")
+out <- tryCatch(key("stuff"), error=function(e) e)
+if(!is(out, "http_error")) delete("stuff")
 ```
 
 ```{r}
@@ -70,7 +83,8 @@ key("stuff")
 ## Update a key
 
 ```{r echo=FALSE}
-delete("foo")
+out <- tryCatch(key("foo"), error=function(e) e)
+if(!is(out, "http_error")) delete("foo")
 ```
 
 Create a key
@@ -88,7 +102,8 @@ update(key="foo", value="bar stool")
 ## Create in-order keys
 
 ```{r echo=FALSE}
-delete("queue")
+out <- tryCatch(key("queue"), error=function(e) e)
+if(!is(out, "http_error")) delete("queue")
 ```
 
 ```{r}

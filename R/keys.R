@@ -61,7 +61,8 @@
 #' @export
 #' @rdname keys
 keys <- function(recursive = NULL, sorted = NULL, ...) {
-  etcd_parse(etcd_GET(sprintf("%s%s/", etcdbase(), "keys"), list(recursive, sorted), ...))
+  etcd_parse(etcd_GET(sprintf("%s%s/", etcdbase(), "keys"),
+                       etc(list(recursive=recursive, sorted=sorted)), ...))
 }
 
 #' @export
@@ -73,8 +74,8 @@ key <- function(key, recursive = NULL, sorted = NULL, ...) {
 
 #' @export
 #' @rdname keys
-create <- function(key, value, ttl = NULL, ...) {
-  etcd_parse(etcd_PUT(sprintf("%s%s/%s/", etcdbase(), "keys", key), value, ttl, ...))
+create <- function(key, value = NULL, ttl = NULL, dir = FALSE, ...) {
+  etcd_parse(etcd_PUT(sprintf("%s%s/%s/", etcdbase(), "keys", key), value, ttl, dir, ...))
 }
 
 #' @export
@@ -91,7 +92,7 @@ create_inorder <- function(key, value, ttl = NULL, ...) {
 
 #' @export
 #' @rdname keys
-delete <- function(key, prevValue = NULL, prevIndex = NULL, ...) {
+delete <- function(key, prevValue = NULL, prevIndex = NULL, dir = FALSE, ...) {
   etcd_parse(etcd_DELETE(sprintf("%s%s/%s/", etcdbase(), "keys", key),
-                         etc(list(prevValue=prevValue, prevIndex=prevIndex)), ...))
+                         etc(list(prevValue=prevValue, prevIndex=prevIndex, dir=dir)), ...))
 }
