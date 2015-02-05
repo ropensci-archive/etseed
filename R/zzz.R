@@ -1,6 +1,31 @@
-etcd_GET <- function(url, ...){
-  res <- GET(url, ...)
+etcd_GET <- function(url, args, ...){
+  res <- GET(url, query=args, ...)
   stop_for_status(res)
+  content(res, "text")
+}
+
+etcd_PUT <- function(url, value, ttl=NULL, ...){
+  if(missing(value)){
+    res <- PUT(url, query=list(dir=TRUE), ...)
+  } else {
+    res <- PUT(url, body = list(value=value), query=etc(list(ttl=ttl)), ...)
+  }
+  stop_for_status(res)
+  content(res, "text")
+}
+
+etcd_POST <- function(url, value, ttl=NULL, ...){
+  res <- POST(url, body = list(value=value), query=etc(list(ttl=ttl)), ...)
+  stop_for_status(res)
+  content(res, "text")
+}
+
+etcd_DELETE <- function(url, args, ...){
+  res <- DELETE(url, query=args)
+  if(res$status_code > 201){
+    warn_for_status(res)
+    content(res)
+  }
   content(res, "text")
 }
 
@@ -9,3 +34,5 @@ etcd_parse <- function(x, simplify=FALSE){
 }
 
 etcdbase <- function() "http://127.0.0.1:4001/v2/"
+
+etc <- function (l) Filter(Negate(is.null), l)
