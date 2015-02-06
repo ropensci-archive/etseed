@@ -75,7 +75,7 @@ key <- function(key, recursive = NULL, sorted = NULL, ...) {
 #' @export
 #' @rdname keys
 create <- function(key, value = NULL, ttl = NULL, dir = FALSE, ...) {
-  etcd_parse(etcd_PUT(sprintf("%s%s/%s/", etcdbase(), "keys", key), value, ttl, dir, ...))
+  etcd_parse(etcd_PUT(sprintf("%s%s/%s", etcdbase(), "keys", key), value, ttl, dir, ...))
 }
 
 #' @export

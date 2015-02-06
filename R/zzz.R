@@ -8,14 +8,14 @@ etcd_PUT <- function(url, value, ttl=NULL, dir=FALSE, ...){
   if(missing(value)){
     res <- PUT(url, query=list(dir=TRUE), ...)
   } else {
-    res <- PUT(url, body = list(value=value), query=etc(list(ttl=ttl, dir=dir)), ...)
+    res <- PUT(url, body = list(value=value), query=etc(list(ttl=ttl, dir=dir)), encode="form", ...)
   }
   stop_for_status(res)
   content(res, "text")
 }
 
 etcd_POST <- function(url, value, ttl=NULL, ...){
-  res <- POST(url, body = list(value=value), query=etc(list(ttl=ttl)), ...)
+  res <- POST(url, body = list(value=value), query=etc(list(ttl=ttl)), encode="form", ...)
   stop_for_status(res)
   content(res, "text")
 }
