@@ -12,6 +12,12 @@ knitr::opts_chunk$set(
 
 __etcd R client__
 
+`etcd` is a key-value DB written in `Go`. It has an HTTP API, which this R package wraps. 
+
+[etcd API docs](https://github.com/coreos/etcd/blob/master/Documentation/api.md)
+
+_note: for some reason, I'm getting failures connecting with the HTTP API once in a while, haven't tracked down the problem yet...sorry_ 
+
 ## Installation
 
 Install `etseed`
@@ -44,9 +50,10 @@ version()
 
 ## Create a directory
 
-```{r echo=FALSE}
+```{r echo=FALSE, results='hide'}
 out <- tryCatch(key("neighbor"), error=function(e) e)
 if(!is(out, "http_error")) delete("neighbor", dir=TRUE)
+Sys.sleep(3)
 ```
 
 ```{r}
@@ -55,7 +62,7 @@ create("neighbor", dir=TRUE)
 
 ## Create a key
 
-```{r echo=FALSE}
+```{r echo=FALSE, results='hide'}
 out <- tryCatch(key("mykey"), error=function(e) e)
 if(!is(out, "http_error")) delete("mykey")
 out <- tryCatch(key("stuff"), error=function(e) e)
@@ -64,6 +71,10 @@ if(!is(out, "http_error")) delete("stuff")
 
 ```{r}
 create(key="mykey", value="this is awesome")
+```
+
+```{r echo=FALSE, results='hide'}
+Sys.sleep(3)
 ```
 
 Use `ttl` parameter to make it dissappear after `x` seconds
@@ -82,7 +93,7 @@ key("stuff")
 
 ## Update a key
 
-```{r echo=FALSE}
+```{r echo=FALSE, results='hide'}
 out <- tryCatch(key("foo"), error=function(e) e)
 if(!is(out, "http_error")) delete("foo")
 ```
@@ -93,7 +104,7 @@ Create a key
 create(key="foo", value="bar")
 ```
 
-The update the key
+Then update the key
 
 ```{r}
 update(key="foo", value="bar stool")
@@ -101,14 +112,15 @@ update(key="foo", value="bar stool")
 
 ## Create in-order keys
 
-```{r echo=FALSE}
-out <- tryCatch(key("queue"), error=function(e) e)
-if(!is(out, "http_error")) delete("queue")
+```{r}
+create_inorder("queue", "thing1")
 ```
 
 ```{r}
-create_inorder("queue", "thing1")
 create_inorder("queue", "thing2")
+```
+
+```{r}
 create_inorder("queue", "thing3")
 ```
 
