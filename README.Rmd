@@ -10,6 +10,8 @@ knitr::opts_chunk$set(
 )
 ```
 
+[![Build Status](https://api.travis-ci.org/ropensci/etseed.png)](https://travis-ci.org/ropensci/etseed)
+
 __etcd R client__
 
 `etcd` is a key-value DB written in `Go`. It has an HTTP API, which this R package wraps. 
