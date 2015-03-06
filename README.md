@@ -416,7 +416,7 @@ key("mykey")
 
 ## Meta
 
-* Please report any issues or bugs](https://github.com/ropensci/etseed/issues).
+* Please [report any issues or bugs](https://github.com/ropensci/etseed/issues).
 * License: MIT
 * Citation: execute `citation(package = 'etseed')`
 
