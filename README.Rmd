@@ -11,6 +11,8 @@ knitr::opts_chunk$set(
 ```
 
 [![Build Status](https://api.travis-ci.org/ropensci/etseed.png)](https://travis-ci.org/ropensci/etseed)
+[![Build status](https://ci.appveyor.com/api/projects/status/h5hd4slsy59r52te?svg=true)](https://ci.appveyor.com/project/sckott/etseed)
+
 
 __etcd R client__
 
