@@ -4,7 +4,7 @@ etseed
 
 
 [![Build Status](https://api.travis-ci.org/ropensci/etseed.png)](https://travis-ci.org/ropensci/etseed)
-[![Build status](https://ci.appveyor.com/api/projects/status/h5hd4slsy59r52te?svg=true)](https://ci.appveyor.com/project/sckott/etseed)
+[![Build status](https://ci.appveyor.com/api/projects/status/80oy29dhgw3tvy4k?svg=true)](https://ci.appveyor.com/project/sckott/etseed-04dte)
 
 
 __etcd R client__
@@ -22,7 +22,7 @@ Install `etseed`
 
 ```r
 install.packages("devtools")
-devtools::install_github("sckott/etseed")
+devtools::install_github("ropensci/etseed")
 ```
 
 
@@ -55,7 +55,7 @@ version()
 
 
 ```r
-create("neighbor", dir=TRUE)
+create("/neighbor", dir = TRUE)
 #> $action
 #> [1] "set"
 #> 
@@ -67,10 +67,10 @@ create("neighbor", dir=TRUE)
 #> [1] TRUE
 #> 
 #> $node$modifiedIndex
-#> [1] 156
+#> [1] 190
 #> 
 #> $node$createdIndex
-#> [1] 156
+#> [1] 190
 ```
 
 ## Create a key
@@ -79,7 +79,7 @@ create("neighbor", dir=TRUE)
 
 
 ```r
-create(key="mykey", value="this is awesome")
+create(key = "/mykey", value = "this is awesome")
 #> $action
 #> [1] "set"
 #> 
@@ -91,10 +91,10 @@ create(key="mykey", value="this is awesome")
 #> [1] "this is awesome"
 #> 
 #> $node$modifiedIndex
-#> [1] 158
+#> [1] 192
 #> 
 #> $node$createdIndex
-#> [1] 158
+#> [1] 192
 ```
 
 
@@ -103,7 +103,7 @@ Use `ttl` parameter to make it dissappear after `x` seconds
 
 
 ```r
-create(key="stuff", value="tables", ttl=5)
+create(key = "/stuff", value = "tables", ttl = 5)
 #> $action
 #> [1] "set"
 #> 
@@ -115,23 +115,23 @@ create(key="stuff", value="tables", ttl=5)
 #> [1] "tables"
 #> 
 #> $node$expiration
-#> [1] "2015-03-06T07:32:49.75324467-08:00"
+#> [1] "2015-04-24T07:23:38.377140689-07:00"
 #> 
 #> $node$ttl
 #> [1] 5
 #> 
 #> $node$modifiedIndex
-#> [1] 159
+#> [1] 193
 #> 
 #> $node$createdIndex
-#> [1] 159
+#> [1] 193
 ```
 
 And the key will be gone after 5 seconds, see:
 
 
 ```r
-key("stuff")
+key("/stuff")
 #> Error in etcd_GET(sprintf("%s%s/%s/", etcdbase(), "keys", key), ...) : 
 #>   client error: (404) Not Found 
 ```
@@ -144,7 +144,7 @@ Create a key
 
 
 ```r
-create(key="foo", value="bar")
+create(key = "/foo", value = "bar")
 #> $action
 #> [1] "set"
 #> 
@@ -156,17 +156,17 @@ create(key="foo", value="bar")
 #> [1] "bar"
 #> 
 #> $node$modifiedIndex
-#> [1] 161
+#> [1] 195
 #> 
 #> $node$createdIndex
-#> [1] 161
+#> [1] 195
 ```
 
 Then update the key
 
 
 ```r
-update(key="foo", value="bar stool")
+update(key = "/foo", value = "bar stool")
 #> $action
 #> [1] "set"
 #> 
@@ -177,87 +177,69 @@ update(key="foo", value="bar stool")
 #> $node$value
 #> [1] "bar stool"
 #> 
-#> $node$modifiedIndex
-#> [1] 162
-#> 
-#> $node$createdIndex
-#> [1] 162
-#> 
-#> 
-#> $prevNode
-#> $prevNode$key
-#> [1] "/foo/"
-#> 
-#> $prevNode$value
-#> [1] "bar"
-#> 
-#> $prevNode$modifiedIndex
-#> [1] 161
-#> 
-#> $prevNode$createdIndex
-#> [1] 161
+...
 ```
 
 ## Create in-order keys
 
 
 ```r
-create_inorder("queue", "thing1")
+create_inorder("/queue", "thing1")
 #> $action
 #> [1] "create"
 #> 
 #> $node
 #> $node$key
-#> [1] "/queue/163"
+#> [1] "/queue/197"
 #> 
 #> $node$value
 #> [1] "thing1"
 #> 
 #> $node$modifiedIndex
-#> [1] 163
+#> [1] 197
 #> 
 #> $node$createdIndex
-#> [1] 163
+#> [1] 197
 ```
 
 
 ```r
-create_inorder("queue", "thing2")
+create_inorder("/queue", "thing2")
 #> $action
 #> [1] "create"
 #> 
 #> $node
 #> $node$key
-#> [1] "/queue/164"
+#> [1] "/queue/198"
 #> 
 #> $node$value
 #> [1] "thing2"
 #> 
 #> $node$modifiedIndex
-#> [1] 164
+#> [1] 198
 #> 
 #> $node$createdIndex
-#> [1] 164
+#> [1] 198
 ```
 
 
 ```r
-create_inorder("queue", "thing3")
+create_inorder("/queue", "thing3")
 #> $action
 #> [1] "create"
 #> 
 #> $node
 #> $node$key
-#> [1] "/queue/165"
+#> [1] "/queue/199"
 #> 
 #> $node$value
 #> [1] "thing3"
 #> 
 #> $node$modifiedIndex
-#> [1] 165
+#> [1] 199
 #> 
 #> $node$createdIndex
-#> [1] 165
+#> [1] 199
 ```
 
 ## List keys
@@ -275,172 +257,14 @@ keys()
 #> $node$dir
 #> [1] TRUE
 #> 
-#> $node$nodes
-#> $node$nodes[[1]]
-#> $node$nodes[[1]]$key
-#> [1] "/queue"
-#> 
-#> $node$nodes[[1]]$dir
-#> [1] TRUE
-#> 
-#> $node$nodes[[1]]$modifiedIndex
-#> [1] 8
-#> 
-#> $node$nodes[[1]]$createdIndex
-#> [1] 8
-#> 
-#> 
-#> $node$nodes[[2]]
-#> $node$nodes[[2]]$key
-#> [1] "/stuff"
-#> 
-#> $node$nodes[[2]]$value
-#> [1] "tables"
-#> 
-#> $node$nodes[[2]]$expiration
-#> [1] "2015-03-06T07:32:49.75324467-08:00"
-#> 
-#> $node$nodes[[2]]$ttl
-#> [1] 5
-#> 
-#> $node$nodes[[2]]$modifiedIndex
-#> [1] 159
-#> 
-#> $node$nodes[[2]]$createdIndex
-#> [1] 159
-#> 
-#> 
-#> $node$nodes[[3]]
-#> $node$nodes[[3]]$key
-#> [1] "/foo"
-#> 
-#> $node$nodes[[3]]$value
-#> [1] "bar stool"
-#> 
-#> $node$nodes[[3]]$modifiedIndex
-#> [1] 162
-#> 
-#> $node$nodes[[3]]$createdIndex
-#> [1] 162
-#> 
-#> 
-#> $node$nodes[[4]]
-#> $node$nodes[[4]]$key
-#> [1] "/neighbor"
-#> 
-#> $node$nodes[[4]]$dir
-#> [1] TRUE
-#> 
-#> $node$nodes[[4]]$modifiedIndex
-#> [1] 156
-#> 
-#> $node$nodes[[4]]$createdIndex
-#> [1] 156
-#> 
-#> 
-#> $node$nodes[[5]]
-#> $node$nodes[[5]]$key
-#> [1] "/message"
-#> 
-#> $node$nodes[[5]]$value
-#> [1] "Hello etcd"
-#> 
-#> $node$nodes[[5]]$modifiedIndex
-#> [1] 67
-#> 
-#> $node$nodes[[5]]$createdIndex
-#> [1] 67
-#> 
-#> 
-#> $node$nodes[[6]]
-#> $node$nodes[[6]]$key
-#> [1] "/mykey"
-#> 
-#> $node$nodes[[6]]$value
-#> [1] "this is awesome"
-#> 
-#> $node$nodes[[6]]$modifiedIndex
-#> [1] 158
-#> 
-#> $node$nodes[[6]]$createdIndex
-#> [1] 158
-#> 
-#> 
-#> $node$nodes[[7]]
-#> $node$nodes[[7]]$key
-#> [1] "/nodes"
-#> 
-#> $node$nodes[[7]]$dir
-#> [1] TRUE
-#> 
-#> $node$nodes[[7]]$modifiedIndex
-#> [1] 145
-#> 
-#> $node$nodes[[7]]$createdIndex
-#> [1] 145
-#> 
-#> 
-#> $node$nodes[[8]]
-#> $node$nodes[[8]]$key
-#> [1] "/ttt"
-#> 
-#> $node$nodes[[8]]$value
-#> [1] "Hello etcd"
-#> 
-#> $node$nodes[[8]]$modifiedIndex
-#> [1] 100
-#> 
-#> $node$nodes[[8]]$createdIndex
-#> [1] 100
-#> 
-#> 
-#> $node$nodes[[9]]
-#> $node$nodes[[9]]$key
-#> [1] "/geoip"
-#> 
-#> $node$nodes[[9]]$dir
-#> [1] TRUE
-#> 
-#> $node$nodes[[9]]$modifiedIndex
-#> [1] 146
-#> 
-#> $node$nodes[[9]]$createdIndex
-#> [1] 146
-#> 
-#> 
-#> $node$nodes[[10]]
-#> $node$nodes[[10]]$key
-#> [1] "/gggg"
-#> 
-#> $node$nodes[[10]]$value
-#> [1] "list(mpg = c(21, 21, 22.8, 21.4, 18.7, 18.1, 14.3, 24.4, 22.8, 19.2, 17.8, 16.4, 17.3, 15.2, 10.4, 10.4, 14.7, 32.4, 30.4, 33.9, 21.5, 15.5, 15.2, 13.3, 19.2, 27.3, 26, 30.4, 15.8, 19.7, 15, 21.4), cyl = c(6, 6, 4, 6, 8, 6, 8, 4, 4, 6, 6, 8, 8, 8, 8, 8, 8, 4, 4, 4, 4, 8, 8, 8, 8, 4, 4, 4, 8, 6, 8, 4), disp = c(160, 160, 108, 258, 360, 225, 360, 146.7, 140.8, 167.6, 167.6, 275.8, 275.8, 275.8, 472, 460, 440, 78.7, 75.7, 71.1, 120.1, 318, 304, 350, 400, 79, 120.3, 95.1, 351, 145, 301, 121), hp = c(110, \n110, 93, 110, 175, 105, 245, 62, 95, 123, 123, 180, 180, 180, 205, 215, 230, 66, 52, 65, 97, 150, 150, 245, 175, 66, 91, 113, 264, 175, 335, 109), drat = c(3.9, 3.9, 3.85, 3.08, 3.15, 2.76, 3.21, 3.69, 3.92, 3.92, 3.92, 3.07, 3.07, 3.07, 2.93, 3, 3.23, 4.08, 4.93, 4.22, 3.7, 2.76, 3.15, 3.73, 3.08, 4.08, 4.43, 3.77, 4.22, 3.62, 3.54, 4.11), wt = c(2.62, 2.875, 2.32, 3.215, 3.44, 3.46, 3.57, 3.19, 3.15, 3.44, 3.44, 4.07, 3.73, 3.78, 5.25, 5.424, 5.345, 2.2, 1.615, 1.835, 2.465, 3.52, 3.435, 3.84, \n3.845, 1.935, 2.14, 1.513, 3.17, 2.77, 3.57, 2.78), qsec = c(16.46, 17.02, 18.61, 19.44, 17.02, 20.22, 15.84, 20, 22.9, 18.3, 18.9, 17.4, 17.6, 18, 17.98, 17.82, 17.42, 19.47, 18.52, 19.9, 20.01, 16.87, 17.3, 15.41, 17.05, 18.9, 16.7, 16.9, 14.5, 15.5, 14.6, 18.6), vs = c(0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1), am = c(1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1), gear = c(4, 4, 4, 3, 3, 3, \n3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 4, 4, 4, 3, 3, 3, 3, 3, 4, 5, 5, 5, 5, 5, 4), carb = c(4, 4, 1, 1, 2, 1, 4, 2, 2, 4, 4, 3, 3, 3, 4, 4, 4, 1, 2, 1, 1, 2, 2, 4, 2, 1, 2, 2, 4, 6, 8, 2))"
-#> 
-#> $node$nodes[[10]]$modifiedIndex
-#> [1] 103
-#> 
-#> $node$nodes[[10]]$createdIndex
-#> [1] 103
-#> 
-#> 
-#> $node$nodes[[11]]
-#> $node$nodes[[11]]$key
-#> [1] "/hello"
-#> 
-#> $node$nodes[[11]]$value
-#> [1] ""
-#> 
-#> $node$nodes[[11]]$modifiedIndex
-#> [1] 77
-#> 
-#> $node$nodes[[11]]$createdIndex
-#> [1] 77
+...
 ```
 
 ## List a key
 
 
 ```r
-key("mykey")
+key("/mykey")
 #> $action
 #> [1] "get"
 #> 
@@ -452,10 +276,10 @@ key("mykey")
 #> [1] "this is awesome"
 #> 
 #> $node$modifiedIndex
-#> [1] 158
+#> [1] 192
 #> 
 #> $node$createdIndex
-#> [1] 158
+#> [1] 192
 ```
 
 ## Meta

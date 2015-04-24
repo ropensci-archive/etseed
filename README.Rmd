@@ -2,6 +2,31 @@ etseed
 ========
 
 ```{r echo=FALSE}
+library("knitr")
+hook_output <- knitr::knit_hooks$get("output")
+knitr::knit_hooks$set(output = function(x, options) {
+   lines <- options$output.lines
+   if (is.null(lines)) {
+     return(hook_output(x, options))  # pass to default hook
+   }
+   x <- unlist(strsplit(x, "\n"))
+   more <- "..."
+   if (length(lines)==1) {        # first n lines
+     if (length(x) > lines) {
+       # truncate the output, but add ....
+       x <- c(head(x, lines), more)
+     }
+   } else {
+     x <- c(if (abs(lines[1])>1) more else NULL, 
+            x[lines], 
+            if (length(x)>lines[abs(length(lines))]) more else NULL
+           )
+   }
+   # paste these lines together
+   x <- paste(c(x, ""), collapse = "\n")
+   hook_output(x, options)
+ })
+
 knitr::opts_chunk$set(
   warning = FALSE,
   message = FALSE,
@@ -11,7 +36,7 @@ knitr::opts_chunk$set(
 ```
 
 [![Build Status](https://api.travis-ci.org/ropensci/etseed.png)](https://travis-ci.org/ropensci/etseed)
-[![Build status](https://ci.appveyor.com/api/projects/status/h5hd4slsy59r52te?svg=true)](https://ci.appveyor.com/project/sckott/etseed)
+[![Build status](https://ci.appveyor.com/api/projects/status/80oy29dhgw3tvy4k?svg=true)](https://ci.appveyor.com/project/sckott/etseed-04dte)
 
 
 __etcd R client__
@@ -28,7 +53,7 @@ Install `etseed`
 
 ```{r eval=FALSE}
 install.packages("devtools")
-devtools::install_github("sckott/etseed")
+devtools::install_github("ropensci/etseed")
 ```
 
 ```{r}
@@ -55,26 +80,26 @@ version()
 ## Create a directory
 
 ```{r echo=FALSE, results='hide'}
-out <- tryCatch(key("neighbor"), error=function(e) e)
-if(!is(out, "http_error")) delete("neighbor", dir=TRUE)
+out <- tryCatch(key("/neighbor"), error=function(e) e)
+if(!is(out, "http_error")) delete("/neighbor", dir=TRUE)
 Sys.sleep(3)
 ```
 
 ```{r}
-create("neighbor", dir=TRUE)
+create("/neighbor", dir = TRUE)
 ```
 
 ## Create a key
 
 ```{r echo=FALSE, results='hide'}
-out <- tryCatch(key("mykey"), error=function(e) e)
-if(!is(out, "http_error")) delete("mykey")
-out <- tryCatch(key("stuff"), error=function(e) e)
-if(!is(out, "http_error")) delete("stuff")
+out <- tryCatch(key("/mykey"), error=function(e) e)
+if(!is(out, "http_error")) delete("/mykey")
+out <- tryCatch(key("/stuff"), error=function(e) e)
+if(!is(out, "http_error")) delete("/stuff")
 ```
 
 ```{r}
-create(key="mykey", value="this is awesome")
+create(key = "/mykey", value = "this is awesome")
 ```
 
 ```{r echo=FALSE, results='hide'}
@@ -84,13 +109,13 @@ Sys.sleep(3)
 Use `ttl` parameter to make it dissappear after `x` seconds
 
 ```{r}
-create(key="stuff", value="tables", ttl=5)
+create(key = "/stuff", value = "tables", ttl = 5)
 ```
 
 And the key will be gone after 5 seconds, see:
 
 ```{r eval=FALSE}
-key("stuff")
+key("/stuff")
 #> Error in etcd_GET(sprintf("%s%s/%s/", etcdbase(), "keys", key), ...) : 
 #>   client error: (404) Not Found 
 ```
@@ -98,46 +123,46 @@ key("stuff")
 ## Update a key
 
 ```{r echo=FALSE, results='hide'}
-out <- tryCatch(key("foo"), error=function(e) e)
-if(!is(out, "http_error")) delete("foo")
+out <- tryCatch(key("/foo"), error=function(e) e)
+if(!is(out, "http_error")) delete("/foo")
 ```
 
 Create a key
 
 ```{r}
-create(key="foo", value="bar")
+create(key = "/foo", value = "bar")
 ```
 
 Then update the key
 
-```{r}
-update(key="foo", value="bar stool")
+```{r output.lines = 1:10}
+update(key = "/foo", value = "bar stool")
 ```
 
 ## Create in-order keys
 
 ```{r}
-create_inorder("queue", "thing1")
+create_inorder("/queue", "thing1")
 ```
 
 ```{r}
-create_inorder("queue", "thing2")
+create_inorder("/queue", "thing2")
 ```
 
 ```{r}
-create_inorder("queue", "thing3")
+create_inorder("/queue", "thing3")
 ```
 
 ## List keys
 
-```{r}
+```{r output.lines = 1:10}
 keys()
 ```
 
 ## List a key
 
 ```{r}
-key("mykey")
+key("/mykey")
 ```
 
 ## Meta
