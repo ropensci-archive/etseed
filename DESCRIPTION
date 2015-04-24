@@ -1,6 +1,6 @@
 Package: etseed
 Title: etcd R client
-Description: etcd R client
+Description: Client to interact with the etcd key-value data store.
 Version: 0.0.3.99
 Date: 2015-04-24
 License: MIT + file LICENSE
