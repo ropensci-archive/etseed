@@ -1,4 +1,4 @@
-#' Ping urls to time requests
+#' etcd client for R
 #'
 #' @name etseed-package
 #' @aliases etseed

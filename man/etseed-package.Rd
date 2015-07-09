@@ -6,7 +6,7 @@
 \alias{etseed-package}
 \title{etcd R client}
 \description{
-Ping urls to time requests
+etcd client for R
 }
 \author{
 Scott Chamberlain \email{myrmecocystus@gmail.com}
