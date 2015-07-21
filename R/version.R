@@ -9,5 +9,5 @@
 #' }
 
 version <- function(...) {
-  etcd_GET(sub("v2/", "version", etcdbase()), NULL, ...)
+  etcd_parse(etcd_GET(sub("v2/", "version", etcdbase()), NULL, ...))
 }
