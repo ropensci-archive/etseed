@@ -46,7 +46,11 @@ done.
 
 ```r
 version()
-#> [1] "etcd 0.4.6"
+#> $etcdserver
+#> [1] "2.1.1"
+#> 
+#> $etcdcluster
+#> [1] "2.1.0"
 ```
 
 ## Create a directory
@@ -67,10 +71,10 @@ create("/neighbor", dir = TRUE)
 #> [1] TRUE
 #> 
 #> $node$modifiedIndex
-#> [1] 190
+#> [1] 22
 #> 
 #> $node$createdIndex
-#> [1] 190
+#> [1] 22
 ```
 
 ## Create a key
@@ -91,10 +95,10 @@ create(key = "/mykey", value = "this is awesome")
 #> [1] "this is awesome"
 #> 
 #> $node$modifiedIndex
-#> [1] 192
+#> [1] 24
 #> 
 #> $node$createdIndex
-#> [1] 192
+#> [1] 24
 ```
 
 
@@ -115,16 +119,16 @@ create(key = "/stuff", value = "tables", ttl = 5)
 #> [1] "tables"
 #> 
 #> $node$expiration
-#> [1] "2015-04-24T07:23:38.377140689-07:00"
+#> [1] "2015-07-21T19:53:13.19404293Z"
 #> 
 #> $node$ttl
 #> [1] 5
 #> 
 #> $node$modifiedIndex
-#> [1] 193
+#> [1] 25
 #> 
 #> $node$createdIndex
-#> [1] 193
+#> [1] 25
 ```
 
 And the key will be gone after 5 seconds, see:
@@ -156,10 +160,10 @@ create(key = "/foo", value = "bar")
 #> [1] "bar"
 #> 
 #> $node$modifiedIndex
-#> [1] 195
+#> [1] 26
 #> 
 #> $node$createdIndex
-#> [1] 195
+#> [1] 26
 ```
 
 Then update the key
@@ -190,16 +194,16 @@ create_inorder("/queue", "thing1")
 #> 
 #> $node
 #> $node$key
-#> [1] "/queue/197"
+#> [1] "/queue/28"
 #> 
 #> $node$value
 #> [1] "thing1"
 #> 
 #> $node$modifiedIndex
-#> [1] 197
+#> [1] 28
 #> 
 #> $node$createdIndex
-#> [1] 197
+#> [1] 28
 ```
 
 
@@ -210,16 +214,16 @@ create_inorder("/queue", "thing2")
 #> 
 #> $node
 #> $node$key
-#> [1] "/queue/198"
+#> [1] "/queue/29"
 #> 
 #> $node$value
 #> [1] "thing2"
 #> 
 #> $node$modifiedIndex
-#> [1] 198
+#> [1] 29
 #> 
 #> $node$createdIndex
-#> [1] 198
+#> [1] 29
 ```
 
 
@@ -230,16 +234,16 @@ create_inorder("/queue", "thing3")
 #> 
 #> $node
 #> $node$key
-#> [1] "/queue/199"
+#> [1] "/queue/30"
 #> 
 #> $node$value
 #> [1] "thing3"
 #> 
 #> $node$modifiedIndex
-#> [1] 199
+#> [1] 30
 #> 
 #> $node$createdIndex
-#> [1] 199
+#> [1] 30
 ```
 
 ## List keys
@@ -251,12 +255,12 @@ keys()
 #> [1] "get"
 #> 
 #> $node
-#> $node$key
-#> [1] "/"
-#> 
 #> $node$dir
 #> [1] TRUE
 #> 
+#> $node$nodes
+#> $node$nodes[[1]]
+#> $node$nodes[[1]]$key
 ...
 ```
 
@@ -276,10 +280,10 @@ key("/mykey")
 #> [1] "this is awesome"
 #> 
 #> $node$modifiedIndex
-#> [1] 192
+#> [1] 24
 #> 
 #> $node$createdIndex
-#> [1] 192
+#> [1] 24
 ```
 
 ## Meta
