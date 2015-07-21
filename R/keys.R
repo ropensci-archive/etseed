@@ -12,6 +12,8 @@
 #' @param prevIndex (integer) Previous index to match against.
 #' @param ttl (integer) Seconds after which the key will be removed.
 #' @param dir (logical) Whether to crate or delete a directory or not
+#' @param wait (logical) Whether to wait or not for a key change. Deafult: \code{FALSE}
+#' @param wait_index (integer) Index to wait until
 #' @param ... Further args passed on to \code{\link[httr]{GET}}
 #'
 #' @details \code{\link{create}} and \code{\link{update}} are essentially the same thing, but
@@ -43,6 +45,14 @@
 #' key("/mykey")
 #' key("/things")
 #'
+#' # Waiting
+#' ## Wait for a change via long-polling
+#' ## in another R session, load etseed, then run the 2nd line of code
+#' # key("/anewkey", wait = TRUE)
+#' # create("/anewkey", "hey from another R session")
+#' ## Wait for change from cleared event index
+#' key("/anewkey", wait = TRUE, wait_index = 7)
+#'
 #' # Delete a key
 #' create("/hello", "world")
 #' delete("/hello")
@@ -63,14 +73,15 @@
 #' @rdname keys
 keys <- function(recursive = NULL, sorted = NULL, ...) {
   etcd_parse(etcd_GET(sprintf("%s%s/", etcdbase(), "keys"),
-                       etc(list(recursive=recursive, sorted=sorted)), ...))
+                       etc(list(recursive = recursive, sorted = sorted)), ...))
 }
 
 #' @export
 #' @rdname keys
-key <- function(key, recursive = NULL, sorted = NULL, ...) {
+key <- function(key, recursive = NULL, sorted = NULL, wait = FALSE, wait_index = NULL, ...) {
   etcd_parse(etcd_GET(sprintf("%s%s%s", etcdbase(), "keys", check_key(key)),
-                      etc(list(recursive=recursive, sorted=sorted)), ...))
+                      etc(list(recursive = recursive, sorted = sorted,
+                               wait = asl(wait), waitIndex = wait_index)), ...))
 }
 
 #' @export

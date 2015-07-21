@@ -11,7 +11,8 @@
 \usage{
 keys(recursive = NULL, sorted = NULL, ...)
 
-key(key, recursive = NULL, sorted = NULL, ...)
+key(key, recursive = NULL, sorted = NULL, wait = FALSE,
+  wait_index = NULL, ...)
 
 create(key, value = NULL, ttl = NULL, dir = FALSE, ...)
 
@@ -30,6 +31,10 @@ delete(key, prevValue = NULL, prevIndex = NULL, dir = FALSE,
 \item{...}{Further args passed on to \code{\link[httr]{GET}}}
 
 \item{key}{(character) A key name. Optional.}
+
+\item{wait}{(logical) Whether to wait or not for a key change. Deafult: \code{FALSE}}
+
+\item{wait_index}{(integer) Index to wait until}
 
 \item{value}{Any object to store. Required for \code{\link{create}}, \code{\link{update}},
 and \code{\link{delete}} functions}
@@ -75,6 +80,14 @@ keys(sorted = TRUE, recursive = TRUE)
 # List a single key
 key("/mykey")
 key("/things")
+
+# Waiting
+## Wait for a change via long-polling
+## in another R session, load etseed, then run the 2nd line of code
+# key("/anewkey", wait = TRUE)
+# create("/anewkey", "hey from another R session")
+## Wait for change from cleared event index
+key("/anewkey", wait = TRUE, wait_index = 7)
 
 # Delete a key
 create("/hello", "world")

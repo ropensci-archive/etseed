@@ -7,6 +7,9 @@
 metrics(pretty = TRUE, ...)
 }
 \arguments{
+\item{pretty}{(logical) Print easier to read with newlines, or as a single string.
+Default: \code{TRUE}}
+
 \item{...}{Further args passed on to \code{\link[httr]{GET}}}
 }
 \value{

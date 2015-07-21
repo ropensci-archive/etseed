@@ -42,3 +42,15 @@ etcd_parse <- function(x, simplify=FALSE){
 etcdbase <- function() "http://127.0.0.1:4001/v2/"
 
 etc <- function(l) Filter(Negate(is.null), l)
+
+asl <- function(z) {
+  if (is.logical(z) || tolower(z) == "true" || tolower(z) == "false") {
+    if (z) {
+      return('true')
+    } else {
+      return('false')
+    }
+  } else {
+    return(z)
+  }
+}

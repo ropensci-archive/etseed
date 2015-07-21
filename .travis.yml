@@ -2,6 +2,9 @@ language: r
 
 sudo: required
 
+before_install:
+  - ./build_etcd.sh v2.1.1
+
 warnings_are_errors: true
 
 r_github_packages:
