@@ -17,8 +17,8 @@ knitr::knit_hooks$set(output = function(x, options) {
        x <- c(head(x, lines), more)
      }
    } else {
-     x <- c(if (abs(lines[1])>1) more else NULL, 
-            x[lines], 
+     x <- c(if (abs(lines[1])>1) more else NULL,
+            x[lines],
             if (length(x)>lines[abs(length(lines))]) more else NULL
            )
    }
@@ -37,15 +37,16 @@ knitr::opts_chunk$set(
 
 [![Build Status](https://api.travis-ci.org/ropensci/etseed.png)](https://travis-ci.org/ropensci/etseed)
 [![Build status](https://ci.appveyor.com/api/projects/status/80oy29dhgw3tvy4k?svg=true)](https://ci.appveyor.com/project/sckott/etseed-04dte)
+[![codecov.io](https://codecov.io/github/ropensci/etseed/coverage.svg?branch=master)](https://codecov.io/github/ropensci/etseed?branch=master)
 
 
 __etcd R client__
 
-`etcd` is a key-value DB written in `Go`. It has an HTTP API, which this R package wraps. 
+`etcd` is a key-value DB written in `Go`. It has an HTTP API, which this R package wraps.
 
 [etcd API docs](https://github.com/coreos/etcd/blob/master/Documentation/api.md)
 
-_note: for some reason, I'm getting failures connecting with the HTTP API once in a while, haven't tracked down the problem yet...sorry_ 
+_note: for some reason, I'm getting failures connecting with the HTTP API once in a while, haven't tracked down the problem yet...sorry_
 
 ## Installation
 
@@ -116,8 +117,8 @@ And the key will be gone after 5 seconds, see:
 
 ```{r eval=FALSE}
 key("/stuff")
-#> Error in etcd_GET(sprintf("%s%s/%s/", etcdbase(), "keys", key), ...) : 
-#>   client error: (404) Not Found 
+#> Error in etcd_GET(sprintf("%s%s/%s/", etcdbase(), "keys", key), ...) :
+#>   client error: (404) Not Found
 ```
 
 ## Update a key
