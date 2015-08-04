@@ -5,8 +5,6 @@ warnings_are_errors: true
 before_install:
   - ./build_etcd.sh v2.1.1
 
-before_script: "./etcd/bin/etcd &"
-
 r_github_packages:
 - jimhester/covr
 
