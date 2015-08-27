@@ -16,5 +16,4 @@ git checkout $ETCD_VERSION
 
 #Temporal solution to travis issue #155
 sudo rm -rf /dev/shm && sudo ln -s /run/shm /dev/shm
-echo "All Done" ]
-
+echo "All Done"
