@@ -51,7 +51,7 @@
 #' # key("/anewkey", wait = TRUE)
 #' # create("/anewkey", "hey from another R session")
 #' ## Wait for change from cleared event index
-#' key("/anewkey", wait = TRUE, wait_index = 7)
+#' # key("/anewkey", wait = TRUE, wait_index = 7)
 #'
 #' # Delete a key
 #' create("/hello", "world")
