@@ -3,7 +3,7 @@ sudo: required
 warnings_are_errors: true
 
 before_install:
-  - ./build_etcd.sh v2.1.2
+  - ./build_etcd.sh v2.1.1
 
 r_github_packages:
 - jimhester/covr

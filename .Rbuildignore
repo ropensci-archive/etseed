@@ -5,4 +5,3 @@ README.Rmd
 appveyor.yml
 build_etcd.sh
 etcd
-etseed/etcd/gopath/src/github.com/coreos/etcd
