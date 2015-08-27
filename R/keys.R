@@ -1,6 +1,5 @@
 #' List a key or all keys
 #'
-#' @import httr jsonlite
 #' @name keys
 #'
 #' @param key (character) A key name. Optional.
