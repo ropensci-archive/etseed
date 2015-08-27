@@ -141,6 +141,9 @@ delete <- function(key, prevValue = NULL, prevIndex = NULL, dir = FALSE, recursi
 }
 
 check_key <- function(x) {
-  stopifnot(grepl("^/", x))
-  x
+  if (!grepl("^/", x)) {
+    stop("The key must be prefixed by a '/'",
+         call. = FALSE)
+  }
+  return(x)
 }
