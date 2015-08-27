@@ -5,13 +5,19 @@ etcd_GET <- function(url, args, ...) {
   content(res, "text")
 }
 
-etcd_PUT <- function(url, value, ttl=NULL, dir=FALSE, ...){
-  if (missing(value)) {
+etcd_PUT <- function(url, value, ttl=NULL, dir=FALSE, file=NULL, ...){
+  if (missing(value) && is.null(file)) {
     res <- PUT(url, query = list(dir = TRUE), ...)
   } else {
     args <- etc(list(ttl = ttl, dir = dir))
     if (length(args) == 0) args <- NULL
-    res <- PUT(url, body = list(value = value), query = args, encode = "form", ...)
+
+    if (is.null(file)) {
+      res <- PUT(url, body = list(value = value), query = args, encode = "form", ...)
+    } else {
+      stop("not working yet from files", call. = FALSE)
+      # res <- PUT(url, body = list(value = upload_file(file)), query = args, encode = "form")
+    }
   }
   stop_for_status(res)
   content(res, "text")

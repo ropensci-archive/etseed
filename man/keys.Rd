@@ -14,7 +14,7 @@ keys(recursive = NULL, sorted = NULL, ...)
 key(key, recursive = NULL, sorted = NULL, wait = FALSE,
   wait_index = NULL, ...)
 
-create(key, value = NULL, ttl = NULL, dir = FALSE, ...)
+create(key, value = NULL, file = NULL, ttl = NULL, dir = FALSE, ...)
 
 update(key, value, ttl = NULL, ...)
 
@@ -134,6 +134,18 @@ delete("/things", prevIndex=13)
 # curl options
 library("httr")
 keys(config = verbose())
+
+# Hidden keys
+## Create a hidden key using "_" at beginning
+create("/_message", "my hidden key")
+## A key that's not hidden
+create("/message", "my un-hidden key")
+## Call to root directory doesn't show the hidden key
+keys()
+
+# Set a key from a file
+cat("hello\\nworld", file = "myfile.txt")
+create("/myfile", file = file)
 }
 }
 
