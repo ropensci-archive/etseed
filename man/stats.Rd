@@ -7,7 +7,7 @@
 stats(which = "leader", pretty = TRUE, ...)
 }
 \arguments{
-\item{which}{(character) one of leader (default) or self}
+\item{which}{(character) one of leader (default), self, or store}
 
 \item{pretty}{(logical) parse text to an R list, or not. Default: \code{TRUE}}
 
@@ -26,6 +26,9 @@ stats()
 
 # self stats
 stats("self")
+
+# store stats
+stats("store")
 
 # Prety or not
 stats(pretty = TRUE)
