@@ -3,7 +3,7 @@ Title: Client for 'etcd', a 'Key-value' Database
 Description: Client to interact with the 'etcd' 'key-value' data store.
     Functions included for managing directories, keys, nodes, and
     getting statistics, and more.
-Version: 0.0.5.9500
+Version: 0.0.6.9000
 License: MIT + file LICENSE
 URL: https://github.com/ropensci/etseed
 BugReports: https://github.com/ropensci/etseed/issues
