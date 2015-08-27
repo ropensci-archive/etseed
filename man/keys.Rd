@@ -51,8 +51,27 @@ and \code{\link{delete}} functions}
 List a key or all keys
 }
 \details{
-\code{\link{create}} and \code{\link{update}} are essentially the same thing, but
-get different names so as not to confuse people (eg. if create did create and update functions.)
+\code{\link{create}} and \code{\link{update}} are essentially the same
+thing, but get different names so as not to confuse people (eg. if create did
+create and update functions.)
+}
+\section{Headers}{
+
+You can get header info on requests via curl options like
+\code{key("/mykey", config = verbose())}, but make sure to load \code{httr} first.
+Headers include in particular three useful ones that provide global information about
+the etcd cluster that serviced a request:
+\itemize{
+ \item X-Etcd-Index: the current etcd index as explained above. When request is a watch
+ on key space, X-Etcd-Index is the current etcd index when the watch starts, which means
+ that the watched event may happen after X-Etcd-Index.
+ \item X-Raft-Index: similar to the etcd index but is for the underlying raft protocol
+ \item X-Raft-Term is an integer that will increase whenever an etcd master election
+ happens in the cluster. If this number is increasing rapidly, you may need to tune
+ the election timeout. See the tuning
+ (\url{https://github.com/coreos/etcd/blob/master/Documentation/tuning.md}) section
+ for details.
+}
 }
 \examples{
 \dontrun{
@@ -61,6 +80,18 @@ create(key="/mykey", value="this is awesome")
 create(key="/things", value="and stuff!")
 ## use ttl
 create(key="/stuff", value="tables", ttl=10)
+
+# Make a directory
+create(key="/mydir", dir = TRUE)
+# List a directory
+key("/mydir")
+# Make a key inside a directory
+create("/mydir/key1", value = "foo")
+create("/mydir/key2", value = "bar")
+# List again, now with two keys
+key("/mydir")
+# Delete a directory
+delete(key="/mydir", dir = TRUE)
 
 # Update a key
 update(key="/things", value="and stuff! and more things")
