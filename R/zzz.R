@@ -1,7 +1,9 @@
 etcd_GET <- function(url, args, ...) {
   if (length(args) == 0) args <- NULL
   res <- GET(url, query = args, ...)
-  stop_for_status(res)
+  if (res$status_code > 201) {
+    stop(content(res)$message, call. = FALSE)
+  }
   content(res, "text")
 }
 
@@ -35,7 +37,7 @@ etcd_DELETE <- function(url, args, ...) {
   if (length(args) == 0) args <- NULL
   res <- DELETE(url, query = args, ...)
   if (res$status_code > 201) {
-    warn_for_status(res)
+    warning(content(res)$message, call. = FALSE)
     content(res)
   }
   content(res, "text")
