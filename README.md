@@ -10,11 +10,14 @@ etseed
 
 __etcd R client__
 
-`etcd` is a key-value DB written in `Go`. It has an HTTP API, which this R package wraps. 
+`etcd` is a key-value DB written in `Go`. It has an HTTP API, which this R package wraps.
 
 [etcd API docs](https://github.com/coreos/etcd/blob/master/Documentation/api.md)
 
-_note: for some reason, I'm getting failures connecting with the HTTP API once in a while, haven't tracked down the problem yet...sorry_ 
+Development follows closely the newest version of `etcd` released by the Coreos folks. As of 
+2015-10-07 that's `etcd v2.2.0`
+
+_note: for some reason, I'm getting failures connecting with the HTTP API once in a while, haven't tracked down the problem yet...sorry_
 
 ## Installation
 
@@ -48,10 +51,10 @@ done.
 ```r
 version()
 #> $etcdserver
-#> [1] "2.1.1"
+#> [1] "2.2.0"
 #> 
 #> $etcdcluster
-#> [1] "2.1.0"
+#> [1] "2.2.0"
 ```
 
 ## Create a directory
@@ -72,10 +75,10 @@ create("/neighbor", dir = TRUE)
 #> [1] TRUE
 #> 
 #> $node$modifiedIndex
-#> [1] 22
+#> [1] 323
 #> 
 #> $node$createdIndex
-#> [1] 22
+#> [1] 323
 ```
 
 ## Create a key
@@ -96,10 +99,10 @@ create(key = "/mykey", value = "this is awesome")
 #> [1] "this is awesome"
 #> 
 #> $node$modifiedIndex
-#> [1] 24
+#> [1] 325
 #> 
 #> $node$createdIndex
-#> [1] 24
+#> [1] 325
 ```
 
 
@@ -120,16 +123,16 @@ create(key = "/stuff", value = "tables", ttl = 5)
 #> [1] "tables"
 #> 
 #> $node$expiration
-#> [1] "2015-07-21T19:53:13.19404293Z"
+#> [1] "2015-10-09T00:56:31.669337169Z"
 #> 
 #> $node$ttl
 #> [1] 5
 #> 
 #> $node$modifiedIndex
-#> [1] 25
+#> [1] 326
 #> 
 #> $node$createdIndex
-#> [1] 25
+#> [1] 326
 ```
 
 And the key will be gone after 5 seconds, see:
@@ -137,8 +140,8 @@ And the key will be gone after 5 seconds, see:
 
 ```r
 key("/stuff")
-#> Error in etcd_GET(sprintf("%s%s/%s/", etcdbase(), "keys", key), ...) : 
-#>   client error: (404) Not Found 
+#> Error in etcd_GET(sprintf("%s%s/%s/", etcdbase(), "keys", key), ...) :
+#>   client error: (404) Not Found
 ```
 
 ## Update a key
@@ -161,10 +164,10 @@ create(key = "/foo", value = "bar")
 #> [1] "bar"
 #> 
 #> $node$modifiedIndex
-#> [1] 26
+#> [1] 328
 #> 
 #> $node$createdIndex
-#> [1] 26
+#> [1] 328
 ```
 
 Then update the key
@@ -195,16 +198,16 @@ create_inorder("/queue", "thing1")
 #> 
 #> $node
 #> $node$key
-#> [1] "/queue/28"
+#> [1] "/queue/00000000000000000330"
 #> 
 #> $node$value
 #> [1] "thing1"
 #> 
 #> $node$modifiedIndex
-#> [1] 28
+#> [1] 330
 #> 
 #> $node$createdIndex
-#> [1] 28
+#> [1] 330
 ```
 
 
@@ -215,16 +218,16 @@ create_inorder("/queue", "thing2")
 #> 
 #> $node
 #> $node$key
-#> [1] "/queue/29"
+#> [1] "/queue/00000000000000000331"
 #> 
 #> $node$value
 #> [1] "thing2"
 #> 
 #> $node$modifiedIndex
-#> [1] 29
+#> [1] 331
 #> 
 #> $node$createdIndex
-#> [1] 29
+#> [1] 331
 ```
 
 
@@ -235,16 +238,16 @@ create_inorder("/queue", "thing3")
 #> 
 #> $node
 #> $node$key
-#> [1] "/queue/30"
+#> [1] "/queue/00000000000000000332"
 #> 
 #> $node$value
 #> [1] "thing3"
 #> 
 #> $node$modifiedIndex
-#> [1] 30
+#> [1] 332
 #> 
 #> $node$createdIndex
-#> [1] 30
+#> [1] 332
 ```
 
 ## List keys
@@ -281,10 +284,10 @@ key("/mykey")
 #> [1] "this is awesome"
 #> 
 #> $node$modifiedIndex
-#> [1] 24
+#> [1] 325
 #> 
 #> $node$createdIndex
-#> [1] 24
+#> [1] 325
 ```
 
 ## Meta

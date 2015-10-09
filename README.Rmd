@@ -46,6 +46,9 @@ __etcd R client__
 
 [etcd API docs](https://github.com/coreos/etcd/blob/master/Documentation/api.md)
 
+Development follows closely the newest version of `etcd` released by the Coreos folks. As of 
+2015-10-07 that's `etcd v2.2.0`
+
 _note: for some reason, I'm getting failures connecting with the HTTP API once in a while, haven't tracked down the problem yet...sorry_
 
 ## Installation
