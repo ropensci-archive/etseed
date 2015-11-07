@@ -40,7 +40,7 @@
 #' # Make a key
 #' create(key="/mykey", value="this is awesome")
 #' create(key="/things", value="and stuff!")
-#' ## use ttl
+#' ## use ttl (expires after ttl seconds)
 #' create(key="/stuff", value="tables", ttl=10)
 #'
 #' # Make a directory

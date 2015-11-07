@@ -3,13 +3,12 @@ Title: Client for 'etcd', a 'Key-value' Database
 Description: Client to interact with the 'etcd' 'key-value' data store.
     Functions included for managing directories, keys, nodes, and
     getting statistics, and more.
-Version: 0.0.6.9700
+Version: 0.0.7.9000
 License: MIT + file LICENSE
 URL: https://github.com/ropensci/etseed
 BugReports: https://github.com/ropensci/etseed/issues
 Authors@R: c(person("Scott", "Chamberlain", role = c("aut", "cre"),
     email = "myrmecocystus@gmail.com"))
-License: MIT + file LICENSE
 LazyData: true
 Imports:
     httr (>= 1.0.0),
@@ -17,3 +16,4 @@ Imports:
 Suggests:
     knitr,
     testthat
+RoxygenNote: 5.0.0

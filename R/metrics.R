@@ -1,7 +1,6 @@
 #' Get etcd metrics
 #'
 #' @export
-#'
 #' @param pretty (logical) Print easier to read with newlines, or as a single string.
 #' Default: \code{TRUE}
 #' @param ... Further args passed on to \code{\link[httr]{GET}}

@@ -1,7 +1,6 @@
 #' Get etcd statistics
 #'
 #' @export
-#'
 #' @param which (character) one of leader (default), self, or store
 #' @param pretty (logical) parse text to an R list, or not. Default: \code{TRUE}
 #' @param ... Further args passed on to \code{\link[httr]{GET}}
