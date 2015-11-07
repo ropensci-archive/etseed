@@ -56,7 +56,7 @@ user_delete <- function(user, auth_user, auth_pwd, ...) {
 }
 
 user_PUT <- function(url, ...) {
-  tt <- PUT(url, au, encode = "json")
+  tt <- PUT(url, ..., encode = "json")
   if (tt$status_code > 201) {
     stop(content(tt)$message, call. = FALSE)
   }
