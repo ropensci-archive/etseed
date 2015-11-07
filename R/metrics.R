@@ -9,7 +9,6 @@
 #' metrics()
 #' metrics(FALSE)
 #' }
-
 metrics <- function(pretty = TRUE, ...) {
   res <- etcd_GET(sub("v2/", "metrics", etcdbase()), NULL, ...)
   if (pretty) {

@@ -16,7 +16,7 @@
 #' @examples \dontrun{
 #' # Add role
 #' perms <- list(fun = list(kv = list(read = "/message/*")))
-#' role_add("fun", perms, "root", "pickbetterpwd")
+#' role_add("fun", perms, auth_user="root", auth_pwd="pickbetterpwd")
 #'
 #' # List roles
 #' role_list()
@@ -31,12 +31,12 @@
 #' # Update a role
 #' ### FIXME - still working on this
 #' ## First, create
-#' role_add("stuff", perm_read = "/message/*", perm_write = "/message/*",
-#'    auth_user = "root", auth_pwd = "pickbetterpwd")
+#' # role_add("stuff", perm_read = "/message/*", perm_write = "/message/*",
+#' #    auth_user = "root", auth_pwd = "pickbetterpwd")
 #' ## udpate
-#' "xxx"
+#' # "xxx"
 #' ## get
-#' role_get("stuff")
+#' # role_get("stuff")
 #' }
 
 #' @export
