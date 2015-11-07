@@ -26,9 +26,11 @@
 
 #' @export
 #' @rdname users
-user_add <- function(user, password, auth_user, auth_pwd, roles = NULL, ...) {
+user_add <- function(user, password, auth_user = NULL, auth_pwd = NULL, roles = NULL, ...) {
+  if (is.null(auth_user)) auth_user <- user
+  if (is.null(auth_pwd)) auth_pwd <- password
   args <- etc(list(user = user, password = password, roles = roles))
-  auth_PUT(paste0(etcdbase(), paste0("auth/users/", user)),
+  user_PUT(paste0(etcdbase(), paste0("auth/users/", user)),
            body = args, make_auth(auth_user, auth_pwd), ...)
 }
 
@@ -51,4 +53,13 @@ user_get <- function(user, ...) {
 user_delete <- function(user, auth_user, auth_pwd, ...) {
   invisible(etcd_DELETE(paste0(etcdbase(), paste0("auth/users/", user)),
                         NULL, make_auth(auth_user, auth_pwd), ...))
+}
+
+user_PUT <- function(url, ...) {
+  tt <- PUT(url, au, encode = "json")
+  if (tt$status_code > 201) {
+    stop(content(tt)$message, call. = FALSE)
+  }
+  res <- content(tt, "text")
+  jsonlite::fromJSON(res)
 }

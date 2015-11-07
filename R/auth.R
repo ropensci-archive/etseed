@@ -11,10 +11,10 @@
 #' auth_status()
 #'
 #' # enable authentication
-#' auth_enable()
+#' auth_enable("root", "pickbetterpwd")
 #'
 #' # woops, if you got error about root user, craeate one first
-#' add_user(user = "root", password = "pickbetterpwd")
+#' user_add(user = "root", password = "pickbetterpwd")
 #'
 #' # disable authentication
 #' auth_disable("root", "pickbetterpwd")
@@ -43,25 +43,25 @@ auth_status <- function(...) {
 
 #' @export
 #' @rdname auth
-auth_enable <- function(...) {
-  auth_PUT(paste0(etcdbase(), "auth/enable"), ...)
+auth_enable <- function(auth_user, auth_pwd, ...) {
+  res <- auth_PUT(paste0(etcdbase(), "auth/enable"), make_auth(auth_user, auth_pwd), ...)
+  identical(res, "")
 }
 
 #' @export
 #' @rdname auth
 auth_disable <- function(auth_user, auth_pwd, ...) {
-  res <- etcd_DELETE(paste0(etcdbase(), "auth/enable"), NULL,
-                     make_auth(auth_user, auth_pwd), ...)
-  jsonlite::fromJSON(res)
+  res <- auth_DELETE(paste0(etcdbase(), "auth/enable"), NULL,
+                     make_auth(auth_user, auth_pwd))
+  identical(res, "")
 }
 
 auth_PUT <- function(url, ...) {
-  tt <- PUT(url, ..., encode = "json")
+  tt <- PUT(url, au, encode = "json")
   if (tt$status_code > 201) {
     stop(content(tt)$message, call. = FALSE)
   }
-  res <- content(tt, "text")
-  jsonlite::fromJSON(res)
+  content(tt, "text")
 }
 
 auth_DELETE <- function(url, args, ...) {
