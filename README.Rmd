@@ -44,7 +44,7 @@ __etcd R client__
 
 `etcd` is a key-value DB written in `Go`. It has an HTTP API, which this R package wraps.
 
-[etcd API docs](https://github.com/coreos/etcd/blob/master/Documentation/api.md)
+[etcd API docs](https://github.com/coreos/etcd/blob/master/Documentation/v2/README.md)
 
 Development follows closely the newest version of `etcd` released by the Coreos folks. As of 
 2015-11-06 that's `etcd v2.3.0`

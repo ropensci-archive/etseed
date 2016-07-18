@@ -47,7 +47,7 @@ etcd_parse <- function(x, simplify=FALSE){
   jsonlite::fromJSON(x, simplify)
 }
 
-etcdbase <- function() "http://127.0.0.1:4001/v2/"
+etcdbase <- function() "http://127.0.0.1:2379/v2/"
 
 etc <- function(l) Filter(Negate(is.null), l)
 

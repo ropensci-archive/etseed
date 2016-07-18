@@ -12,10 +12,10 @@ __etcd R client__
 
 `etcd` is a key-value DB written in `Go`. It has an HTTP API, which this R package wraps.
 
-[etcd API docs](https://github.com/coreos/etcd/blob/master/Documentation/api.md)
+[etcd API docs](https://github.com/coreos/etcd/blob/master/Documentation/v2/README.md)
 
 Development follows closely the newest version of `etcd` released by the Coreos folks. As of 
-2015-10-07 that's `etcd v2.2.0`
+2015-11-06 that's `etcd v2.3.0`
 
 _note: for some reason, I'm getting failures connecting with the HTTP API once in a while, haven't tracked down the problem yet...sorry_
 
@@ -51,10 +51,10 @@ done.
 ```r
 version()
 #> $etcdserver
-#> [1] "2.2.0"
+#> [1] "3.0.3"
 #> 
 #> $etcdcluster
-#> [1] "2.2.0"
+#> [1] "3.0.0"
 ```
 
 ## Create a directory
@@ -75,10 +75,10 @@ create("/neighbor", dir = TRUE)
 #> [1] TRUE
 #> 
 #> $node$modifiedIndex
-#> [1] 323
+#> [1] 13
 #> 
 #> $node$createdIndex
-#> [1] 323
+#> [1] 13
 ```
 
 ## Create a key
@@ -99,10 +99,10 @@ create(key = "/mykey", value = "this is awesome")
 #> [1] "this is awesome"
 #> 
 #> $node$modifiedIndex
-#> [1] 325
+#> [1] 15
 #> 
 #> $node$createdIndex
-#> [1] 325
+#> [1] 15
 ```
 
 
@@ -123,16 +123,16 @@ create(key = "/stuff", value = "tables", ttl = 5)
 #> [1] "tables"
 #> 
 #> $node$expiration
-#> [1] "2015-10-09T00:56:31.669337169Z"
+#> [1] "2016-07-18T05:39:48.143787615Z"
 #> 
 #> $node$ttl
 #> [1] 5
 #> 
 #> $node$modifiedIndex
-#> [1] 326
+#> [1] 16
 #> 
 #> $node$createdIndex
-#> [1] 326
+#> [1] 16
 ```
 
 And the key will be gone after 5 seconds, see:
@@ -164,10 +164,10 @@ create(key = "/foo", value = "bar")
 #> [1] "bar"
 #> 
 #> $node$modifiedIndex
-#> [1] 328
+#> [1] 17
 #> 
 #> $node$createdIndex
-#> [1] 328
+#> [1] 17
 ```
 
 Then update the key
@@ -198,16 +198,16 @@ create_inorder("/queue", "thing1")
 #> 
 #> $node
 #> $node$key
-#> [1] "/queue/00000000000000000330"
+#> [1] "/queue/00000000000000000019"
 #> 
 #> $node$value
 #> [1] "thing1"
 #> 
 #> $node$modifiedIndex
-#> [1] 330
+#> [1] 19
 #> 
 #> $node$createdIndex
-#> [1] 330
+#> [1] 19
 ```
 
 
@@ -218,16 +218,16 @@ create_inorder("/queue", "thing2")
 #> 
 #> $node
 #> $node$key
-#> [1] "/queue/00000000000000000331"
+#> [1] "/queue/00000000000000000020"
 #> 
 #> $node$value
 #> [1] "thing2"
 #> 
 #> $node$modifiedIndex
-#> [1] 331
+#> [1] 20
 #> 
 #> $node$createdIndex
-#> [1] 331
+#> [1] 20
 ```
 
 
@@ -238,16 +238,16 @@ create_inorder("/queue", "thing3")
 #> 
 #> $node
 #> $node$key
-#> [1] "/queue/00000000000000000332"
+#> [1] "/queue/00000000000000000021"
 #> 
 #> $node$value
 #> [1] "thing3"
 #> 
 #> $node$modifiedIndex
-#> [1] 332
+#> [1] 21
 #> 
 #> $node$createdIndex
-#> [1] 332
+#> [1] 21
 ```
 
 ## List keys
@@ -284,10 +284,10 @@ key("/mykey")
 #> [1] "this is awesome"
 #> 
 #> $node$modifiedIndex
-#> [1] 325
+#> [1] 15
 #> 
 #> $node$createdIndex
-#> [1] 325
+#> [1] 15
 ```
 
 ## Meta
