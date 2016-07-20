@@ -4,7 +4,7 @@
 \name{etseed-package}
 \alias{etseed}
 \alias{etseed-package}
-\title{etcd R client}
+\title{etcd client for R}
 \description{
 etcd client for R
 }

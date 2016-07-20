@@ -3,9 +3,6 @@
 \name{metrics}
 \alias{metrics}
 \title{Get etcd metrics}
-\usage{
-metrics(pretty = TRUE, ...)
-}
 \arguments{
 \item{pretty}{(logical) Print easier to read with newlines, or as a single string.
 Default: \code{TRUE}}
@@ -20,8 +17,11 @@ Get etcd metrics
 }
 \examples{
 \dontrun{
-metrics()
-metrics(FALSE)
+# make a client
+cli <- etcd()
+
+cli$metrics()
+cli$metrics(FALSE)
 }
 }
 

@@ -37,124 +37,79 @@
 #' }
 #'
 #' @examples \dontrun{
+#' # make a client
+#' cli <- etcd()
+#'
 #' # Make a key
-#' create(key="/mykey", value="this is awesome")
-#' create(key="/things", value="and stuff!")
+#' cli$create(key="/mykey", value="this is awesome")
+#' cli$create(key="/things", value="and stuff!")
 #' ## use ttl (expires after ttl seconds)
-#' create(key="/stuff", value="tables", ttl=10)
+#' cli$create(key="/stuff", value="tables", ttl=10)
 #'
 #' # Make a directory
-#' create(key="/mydir", dir = TRUE)
+#' cli$create(key="/mydir", dir = TRUE)
 #' # List a directory
-#' key("/mydir")
+#' cli$key("/mydir")
 #' # Make a key inside a directory
-#' create("/mydir/key1", value = "foo")
-#' create("/mydir/key2", value = "bar")
+#' cli$create("/mydir/key1", value = "foo")
+#' cli$create("/mydir/key2", value = "bar")
 #' # List again, now with two keys
-#' key("/mydir")
+#' cli$key("/mydir")
 #' # Delete a directory
-#' delete(key="/mydir", dir = TRUE)
+#' cli$delete(key="/mydir", dir = TRUE)
 #'
 #' # Update a key
-#' update(key="/things", value="and stuff! and more things")
+#' cli$update(key="/things", value="and stuff! and more things")
 #'
 #' # Create an in-order key
-#' create_inorder("/queue", "thing1")
-#' create_inorder("/queue", "thing2")
-#' create_inorder("/queue", "thing3")
-#' key("/queue", sorted = TRUE, recursive = TRUE)
+#' cli$create_inorder("/queue", "thing1")
+#' cli$create_inorder("/queue", "thing2")
+#' cli$create_inorder("/queue", "thing3")
+#' cli$key("/queue", sorted = TRUE, recursive = TRUE)
 #'
 #' # List all keys
-#' keys()
-#' keys(sorted = TRUE)
-#' keys(recursive = TRUE)
-#' keys(sorted = TRUE, recursive = TRUE)
+#' cli$keys()
+#' cli$keys(sorted = TRUE)
+#' cli$keys(recursive = TRUE)
+#' cli$keys(sorted = TRUE, recursive = TRUE)
 #'
 #' # List a single key
-#' key("/mykey")
-#' key("/things")
+#' cli$key("/mykey")
+#' cli$key("/things")
 #'
 #' # Waiting
 #' ## Wait for a change via long-polling
 #' ## in another R session, load etseed, then run the 2nd line of code
-#' # key("/anewkey", wait = TRUE)
-#' # create("/anewkey", "hey from another R session")
+#' # cli$key("/anewkey", wait = TRUE)
+#' # cli$create("/anewkey", "hey from another R session")
 #' ## Wait for change from cleared event index
-#' # key("/anewkey", wait = TRUE, wait_index = 7)
+#' # cli$key("/anewkey", wait = TRUE, wait_index = 7)
 #'
 #' # Delete a key
-#' create("/hello", "world")
-#' delete("/hello")
+#' cli$create("/hello", "world")
+#' cli$delete("/hello")
 #' ## Delete only if matches previous value, fails
-#' delete("/things", prevValue="two")
+#' cli$delete("/things", prevValue="two")
 #' ## Delete only if matches previous index
 #' ### Fails
-#' delete("/things", prevIndex=1)
+#' cli$delete("/things", prevIndex=1)
 #' ### Works
-#' delete("/things", prevIndex=13)
+#' cli$delete("/things", prevIndex=13)
 #'
 #' # curl options
 #' library("httr")
-#' keys(config = verbose())
+#' cli$keys(config = verbose())
 #'
 #' # Hidden keys
 #' ## Create a hidden key using "_" at beginning
-#' create("/_message", "my hidden key")
+#' cli$create("/_message", "my hidden key")
 #' ## A key that's not hidden
-#' create("/message", "my un-hidden key")
+#' cli$create("/message", "my un-hidden key")
 #' ## Call to root directory doesn't show the hidden key
-#' keys()
+#' cli$keys()
 #'
 #' # Set a key from a file
 #' cat("hello\nworld", file = "myfile.txt")
-#' create("/myfile", file = file)
+#' cli$create("/myfile", file = file)
 #' }
-
-#' @export
-#' @rdname keys
-keys <- function(recursive = NULL, sorted = NULL, ...) {
-  etcd_parse(etcd_GET(sprintf("%s%s/", etcdbase(), "keys"),
-                       etc(list(recursive = recursive, sorted = sorted)), ...))
-}
-
-#' @export
-#' @rdname keys
-key <- function(key, recursive = NULL, sorted = NULL, wait = FALSE, wait_index = NULL, ...) {
-  etcd_parse(etcd_GET(sprintf("%s%s%s", etcdbase(), "keys", check_key(key)),
-                      etc(list(recursive = recursive, sorted = sorted,
-                               wait = asl(wait), waitIndex = wait_index)), ...))
-}
-
-#' @export
-#' @rdname keys
-create <- function(key, value = NULL, file = NULL, ttl = NULL, dir = FALSE, ...) {
-  etcd_parse(etcd_PUT(sprintf("%s%s%s", etcdbase(), "keys", check_key(key)), value, ttl, dir, file, ...))
-}
-
-#' @export
-#' @rdname keys
-update <- function(key, value, ttl = NULL, ...) {
-  etcd_parse(etcd_PUT(sprintf("%s%s%s", etcdbase(), "keys", check_key(key)), value, ttl, ...))
-}
-
-#' @export
-#' @rdname keys
-create_inorder <- function(key, value, ttl = NULL, ...) {
-  etcd_parse(etcd_POST(sprintf("%s%s%s", etcdbase(), "keys", check_key(key)), value, ttl, ...))
-}
-
-#' @export
-#' @rdname keys
-delete <- function(key, prevValue = NULL, prevIndex = NULL, dir = FALSE, recursive = NULL, ...) {
-  etcd_parse(etcd_DELETE(sprintf("%s%s%s", etcdbase(), "keys", check_key(key)),
-                         etc(list(prevValue = prevValue, prevIndex = prevIndex, dir = dir,
-                                  recursive = recursive)), ...))
-}
-
-check_key <- function(x) {
-  if (!grepl("^/", x)) {
-    stop("The key must be prefixed by a '/'",
-         call. = FALSE)
-  }
-  return(x)
-}
+NULL
