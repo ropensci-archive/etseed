@@ -1,15 +1,9 @@
 language: r
-sudo: required
-warnings_are_errors: true
+cache: packages
+sudo: false
 
 before_install:
-  - ./build_etcd.sh v2.1.1
-
-r_github_packages:
-- jimhester/covr
-
-after_success:
-- Rscript -e 'covr::codecov()'
+  - ./build_etcd.sh v3.0.3
 
 notifications:
   slack:
