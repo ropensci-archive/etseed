@@ -1,6 +1,5 @@
 language: r
-cache: packages
-sudo: true
+sudo: required
 
 before_install:
   - ./build_etcd.sh v3.0.3
