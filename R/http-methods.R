@@ -18,7 +18,7 @@ etcd_PUT <- function(url, value, ttl=NULL, dir=FALSE, file=NULL, ...){
       res <- PUT(url, body = list(value = value), query = args, encode = "form", ...)
     } else {
       stop("not working yet from files", call. = FALSE)
-      # res <- PUT(url, body = list(value = upload_file(file)), query = args, encode = "form")
+      # res <- PUT(url, body = list(value = upload_file(file)), query = args, encode = "form", ...)
     }
   }
   stop_for_status(res)
