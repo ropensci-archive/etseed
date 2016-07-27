@@ -1,12 +1,11 @@
 language: r
 cache: packages
-sudo: false
+sudo: required
 latex: false
 
-addons:
-  apt:
-    packages:
-      - golang
+before_install:
+  - sudo add-apt-repository ppa:ubuntu-lxc/lxd-stable -y
+  - sudo apt-get install golang -y
 
 notifications:
   slack:
