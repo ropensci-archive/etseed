@@ -3,8 +3,8 @@
 #' @name keys
 #'
 #' @param key (character) A key name. Optional.
-#' @param value Any object to store. Required for \code{\link{create}}, \code{\link{update}},
-#' and \code{\link{delete}} functions
+#' @param value Any object to store. Required for \code{create}, \code{update},
+#' and \code{delete} functions
 #' @param recursive Whether to do recursive something???
 #' @param sorted Whether to return sorted or not.
 #' @param prevValue (character) Previous value to match against.
@@ -14,10 +14,6 @@
 #' @param wait (logical) Whether to wait or not for a key change. Deafult: \code{FALSE}
 #' @param wait_index (integer) Index to wait until
 #' @param ... Further args passed on to \code{\link[httr]{GET}}
-#'
-#' @details \code{\link{create}} and \code{\link{update}} are essentially the same
-#' thing, but get different names so as not to confuse people (eg. if create did
-#' create and update functions.)
 #'
 #' @section Headers:
 #' You can get header info on requests via curl options like

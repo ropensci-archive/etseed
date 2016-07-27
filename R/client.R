@@ -1,14 +1,13 @@
 #' etseed client
 #'
 #' @export
+#' @name etcd
 #'
 #' @param host (character) Host url. Deafault: 127.0.0.1
 #' @param port (character/numeric) Port. Default: 2379
 #' @param api_version (characrter) etcd API version. Default: 'v2'
 #' @param allow_redirect (logical) Allow redirects? Default: \code{TRUE}
 #' @param scheme (character) http scheme, one of http or https. Default: http
-#'
-#' @format NULL
 #'
 #' @details \code{etcd} creates a R6 class object. The object is
 #' not cloneable and is portable, so it can be inherited across packages
@@ -116,6 +115,21 @@
 #' cli$api_version
 #' cli$allow_redirect
 #' cli$scheme
+#'
+#' # set a different host
+#' etcd(host = 'stuff.com')
+#'
+#' # set a different port
+#' etcd(host = 3456)
+#'
+#' # set a different etcd API version
+#' etcd(host = 'v3')
+#'
+#' # set a different http scheme
+#' etcd(scheme = 'https')
+#'
+#' # don't allow redirects
+#' etcd(allow_redirects = FALSE)
 #' }
 etcd <- function(host = "127.0.0.1", port = 2379, api_version = 'v2',
                  allow_redirect = TRUE, scheme = 'http') {

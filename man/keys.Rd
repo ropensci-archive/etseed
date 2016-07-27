@@ -6,8 +6,8 @@
 \arguments{
 \item{key}{(character) A key name. Optional.}
 
-\item{value}{Any object to store. Required for \code{\link{create}}, \code{\link{update}},
-and \code{\link{delete}} functions}
+\item{value}{Any object to store. Required for \code{create}, \code{update},
+and \code{delete} functions}
 
 \item{recursive}{Whether to do recursive something???}
 
@@ -29,11 +29,6 @@ and \code{\link{delete}} functions}
 }
 \description{
 List a key or all keys
-}
-\details{
-\code{\link{create}} and \code{\link{update}} are essentially the same
-thing, but get different names so as not to confuse people (eg. if create did
-create and update functions.)
 }
 \section{Headers}{
 

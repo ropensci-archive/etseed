@@ -130,6 +130,21 @@ cli$port
 cli$api_version
 cli$allow_redirect
 cli$scheme
+
+# set a different host
+etcd(host = 'stuff.com')
+
+# set a different port
+etcd(host = 3456)
+
+# set a different etcd API version
+etcd(host = 'v3')
+
+# set a different http scheme
+etcd(scheme = 'https')
+
+# don't allow redirects
+etcd(allow_redirects = FALSE)
 }
 }
 
