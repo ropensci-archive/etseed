@@ -201,7 +201,7 @@ EtcdClient <- R6::R6Class(
     },
 
     update = function(key, value, ttl = NULL, ...) {
-      etcd_parse(etcd_PUT(sprintf("%s%s%s", private$make_url(), "keys", check_key(key)), value, ttl, ...))
+      etcd_parse(etcd_PUT(sprintf("%s/%s%s", private$make_url(), "keys", check_key(key)), value, ttl, ...))
     },
 
     create_inorder = function(key, value, ttl = NULL, ...) {
