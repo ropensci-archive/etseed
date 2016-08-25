@@ -47,7 +47,7 @@ __etcd R client__
 [etcd API docs](https://github.com/coreos/etcd/blob/master/Documentation/v2/README.md)
 
 Development follows closely the newest version of `etcd` released by the Coreos folks. As of 
-2015-11-06 that's `etcd v2.3.0`
+2016-08-24 that's `etcd v3.0.4`
 
 _note: for some reason, I'm getting failures connecting with the HTTP API once in a while, haven't tracked down the problem yet...sorry_
 
@@ -66,14 +66,13 @@ library("etseed")
 
 ## Start etcd
 
+### with brew
+
 at the command line on OSX
 
 ```sh
-brew install etcd
 etcd
 ```
-
-done.
 
 ## Get version
 

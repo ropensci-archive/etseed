@@ -129,7 +129,7 @@
 #' etcd(scheme = 'https')
 #'
 #' # don't allow redirects
-#' etcd(allow_redirects = FALSE)
+#' etcd(allow_redirect = FALSE)
 #' }
 etcd <- function(host = "127.0.0.1", port = 2379, api_version = 'v2',
                  allow_redirect = TRUE, scheme = 'http') {
