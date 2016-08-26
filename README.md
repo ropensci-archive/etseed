@@ -3,25 +3,48 @@ etseed
 
 
 
-[![Build Status](https://api.travis-ci.org/ropensci/etseed.png)](https://travis-ci.org/ropensci/etseed)
+<!-- [![Build Status](https://api.travis-ci.org/ropensci/etseed.png)](https://travis-ci.org/ropensci/etseed)
 [![Build status](https://ci.appveyor.com/api/projects/status/80oy29dhgw3tvy4k?svg=true)](https://ci.appveyor.com/project/sckott/etseed-04dte)
 [![codecov.io](https://codecov.io/github/ropensci/etseed/coverage.svg?branch=master)](https://codecov.io/github/ropensci/etseed?branch=master)
-
+-->
 
 __etcd R client__
 
 `etcd` is a key-value DB written in `Go`. It has an HTTP API, which this R package wraps.
 
-[etcd API docs](https://github.com/coreos/etcd/blob/master/Documentation/v2/README.md)
+[etcd API docs](https://github.com/coreos/etcd/blob/master/Documentation/v2/api.md)
 
 Development follows closely the newest version of `etcd` released by the Coreos folks. As of 
-2015-11-06 that's `etcd v2.3.0`
+2016-08-24 that's `etcd v3.0.4`
 
-_note: for some reason, I'm getting failures connecting with the HTTP API once in a while, haven't tracked down the problem yet...sorry_
+## Installing etcd
 
-## Installation
+See the [etcd Github repo](https://github.com/coreos/etcd#etcd) for help on installing `etcd`. 
+
+There are various ways to install it, and they depend on your operating sytsem. 
+
+You can install via `homebrew`, install from source, and via Docker.
+
+## Start etcd
+
+at the command line
+
+```sh
+etcd
+```
+
+> how to start etcd may differ depending on your setup
+
+## Installing etseed
 
 Install `etseed`
+
+
+```r
+install.packages("etseed")
+```
+
+Development version
 
 
 ```r
@@ -34,24 +57,32 @@ devtools::install_github("ropensci/etseed")
 library("etseed")
 ```
 
-## Start etcd
+## Make a client
 
-at the command line on OSX
+First task when using this package is to initialize a client
+with the `etcd()` function. it's a wrapper around an R6 class.
 
-```sh
-brew install etcd
-etcd
+
+```r
+(client <- etcd())
+#> <etcd client>
+#>   host: 127.0.0.1
+#>   port: 2379
+#>   api_version: v2
+#>   scheme: http
+#>   allow redirect: TRUE
 ```
 
-done.
+Default settings in `etcd()` connect you to `localhost`, and port `2379`, 
+using etcd API version 2, with an `http` scheme.
 
 ## Get version
 
 
 ```r
-version()
+client$version()
 #> $etcdserver
-#> [1] "3.0.3"
+#> [1] "3.0.4"
 #> 
 #> $etcdcluster
 #> [1] "3.0.0"
@@ -63,7 +94,7 @@ version()
 
 
 ```r
-create("/neighbor", dir = TRUE)
+client$create("/neighbor", dir = TRUE)
 #> $action
 #> [1] "set"
 #> 
@@ -75,10 +106,10 @@ create("/neighbor", dir = TRUE)
 #> [1] TRUE
 #> 
 #> $node$modifiedIndex
-#> [1] 13
+#> [1] 182
 #> 
 #> $node$createdIndex
-#> [1] 13
+#> [1] 182
 ```
 
 ## Create a key
@@ -87,7 +118,7 @@ create("/neighbor", dir = TRUE)
 
 
 ```r
-create(key = "/mykey", value = "this is awesome")
+client$create(key = "/mykey", value = "this is awesome")
 #> $action
 #> [1] "set"
 #> 
@@ -99,10 +130,10 @@ create(key = "/mykey", value = "this is awesome")
 #> [1] "this is awesome"
 #> 
 #> $node$modifiedIndex
-#> [1] 15
+#> [1] 184
 #> 
 #> $node$createdIndex
-#> [1] 15
+#> [1] 184
 ```
 
 
@@ -111,7 +142,7 @@ Use `ttl` parameter to make it dissappear after `x` seconds
 
 
 ```r
-create(key = "/stuff", value = "tables", ttl = 5)
+client$create(key = "/stuff", value = "tables", ttl = 5)
 #> $action
 #> [1] "set"
 #> 
@@ -123,23 +154,23 @@ create(key = "/stuff", value = "tables", ttl = 5)
 #> [1] "tables"
 #> 
 #> $node$expiration
-#> [1] "2016-07-18T05:39:48.143787615Z"
+#> [1] "2016-08-26T00:20:47.817598188Z"
 #> 
 #> $node$ttl
 #> [1] 5
 #> 
 #> $node$modifiedIndex
-#> [1] 16
+#> [1] 185
 #> 
 #> $node$createdIndex
-#> [1] 16
+#> [1] 185
 ```
 
 And the key will be gone after 5 seconds, see:
 
 
 ```r
-key("/stuff")
+client$key("/stuff")
 #> Error in etcd_GET(sprintf("%s%s/%s/", etcdbase(), "keys", key), ...) :
 #>   client error: (404) Not Found
 ```
@@ -152,7 +183,7 @@ Create a key
 
 
 ```r
-create(key = "/foo", value = "bar")
+client$create(key = "/foo", value = "bar")
 #> $action
 #> [1] "set"
 #> 
@@ -164,17 +195,17 @@ create(key = "/foo", value = "bar")
 #> [1] "bar"
 #> 
 #> $node$modifiedIndex
-#> [1] 17
+#> [1] 186
 #> 
 #> $node$createdIndex
-#> [1] 17
+#> [1] 186
 ```
 
 Then update the key
 
 
 ```r
-update(key = "/foo", value = "bar stool")
+client$update(key = "/foo", value = "bar stool")
 #> $action
 #> [1] "set"
 #> 
@@ -192,69 +223,27 @@ update(key = "/foo", value = "bar stool")
 
 
 ```r
-create_inorder("/queue", "thing1")
-#> $action
-#> [1] "create"
-#> 
-#> $node
-#> $node$key
-#> [1] "/queue/00000000000000000019"
-#> 
-#> $node$value
-#> [1] "thing1"
-#> 
-#> $node$modifiedIndex
-#> [1] 19
-#> 
-#> $node$createdIndex
-#> [1] 19
+client$create_inorder("/queue", "thing1")
+#> Error in etcd_POST(sprintf("%s%s%s", private$make_url(), "keys", check_key(key)), : Not Found (HTTP 404).
 ```
 
 
 ```r
-create_inorder("/queue", "thing2")
-#> $action
-#> [1] "create"
-#> 
-#> $node
-#> $node$key
-#> [1] "/queue/00000000000000000020"
-#> 
-#> $node$value
-#> [1] "thing2"
-#> 
-#> $node$modifiedIndex
-#> [1] 20
-#> 
-#> $node$createdIndex
-#> [1] 20
+client$create_inorder("/queue", "thing2")
+#> Error in etcd_POST(sprintf("%s%s%s", private$make_url(), "keys", check_key(key)), : Not Found (HTTP 404).
 ```
 
 
 ```r
-create_inorder("/queue", "thing3")
-#> $action
-#> [1] "create"
-#> 
-#> $node
-#> $node$key
-#> [1] "/queue/00000000000000000021"
-#> 
-#> $node$value
-#> [1] "thing3"
-#> 
-#> $node$modifiedIndex
-#> [1] 21
-#> 
-#> $node$createdIndex
-#> [1] 21
+client$create_inorder("/queue", "thing3")
+#> Error in etcd_POST(sprintf("%s%s%s", private$make_url(), "keys", check_key(key)), : Not Found (HTTP 404).
 ```
 
 ## List keys
 
 
 ```r
-keys()
+client$keys()
 #> $action
 #> [1] "get"
 #> 
@@ -272,7 +261,7 @@ keys()
 
 
 ```r
-key("/mykey")
+client$key("/mykey")
 #> $action
 #> [1] "get"
 #> 
@@ -284,10 +273,10 @@ key("/mykey")
 #> [1] "this is awesome"
 #> 
 #> $node$modifiedIndex
-#> [1] 15
+#> [1] 184
 #> 
 #> $node$createdIndex
-#> [1] 15
+#> [1] 184
 ```
 
 ## Meta
@@ -295,5 +284,6 @@ key("/mykey")
 * Please [report any issues or bugs](https://github.com/ropensci/etseed/issues).
 * License: MIT
 * Citation: execute `citation(package = 'etseed')`
+* Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
 
 [![ropensci_footer](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)

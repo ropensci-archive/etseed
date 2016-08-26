@@ -35,25 +35,47 @@ knitr::opts_chunk$set(
 )
 ```
 
-[![Build Status](https://api.travis-ci.org/ropensci/etseed.png)](https://travis-ci.org/ropensci/etseed)
+<!-- [![Build Status](https://api.travis-ci.org/ropensci/etseed.png)](https://travis-ci.org/ropensci/etseed)
 [![Build status](https://ci.appveyor.com/api/projects/status/80oy29dhgw3tvy4k?svg=true)](https://ci.appveyor.com/project/sckott/etseed-04dte)
 [![codecov.io](https://codecov.io/github/ropensci/etseed/coverage.svg?branch=master)](https://codecov.io/github/ropensci/etseed?branch=master)
-
+-->
 
 __etcd R client__
 
 `etcd` is a key-value DB written in `Go`. It has an HTTP API, which this R package wraps.
 
-[etcd API docs](https://github.com/coreos/etcd/blob/master/Documentation/v2/README.md)
+[etcd API docs](https://github.com/coreos/etcd/blob/master/Documentation/v2/api.md)
 
 Development follows closely the newest version of `etcd` released by the Coreos folks. As of 
 2016-08-24 that's `etcd v3.0.4`
 
-_note: for some reason, I'm getting failures connecting with the HTTP API once in a while, haven't tracked down the problem yet...sorry_
+## Installing etcd
 
-## Installation
+See the [etcd Github repo](https://github.com/coreos/etcd#etcd) for help on installing `etcd`. 
+
+There are various ways to install it, and they depend on your operating sytsem. 
+
+You can install via `homebrew`, install from source, and via Docker.
+
+## Start etcd
+
+at the command line
+
+```sh
+etcd
+```
+
+> how to start etcd may differ depending on your setup
+
+## Installing etseed
 
 Install `etseed`
+
+```{r eval=FALSE}
+install.packages("etseed")
+```
+
+Development version
 
 ```{r eval=FALSE}
 install.packages("devtools")
@@ -64,45 +86,47 @@ devtools::install_github("ropensci/etseed")
 library("etseed")
 ```
 
-## Start etcd
+## Make a client
 
-### with brew
+First task when using this package is to initialize a client
+with the `etcd()` function. it's a wrapper around an R6 class.
 
-at the command line on OSX
-
-```sh
-etcd
+```{r}
+(client <- etcd())
 ```
+
+Default settings in `etcd()` connect you to `localhost`, and port `2379`, 
+using etcd API version 2, with an `http` scheme.
 
 ## Get version
 
 ```{r}
-version()
+client$version()
 ```
 
 ## Create a directory
 
 ```{r echo=FALSE, results='hide'}
-out <- tryCatch(key("/neighbor"), error=function(e) e)
-if(!is(out, "http_error")) delete("/neighbor", dir=TRUE)
+out <- tryCatch(client$key("/neighbor"), error=function(e) e)
+if (!inherits(out, "http_error")) client$delete("/neighbor", dir=TRUE)
 Sys.sleep(3)
 ```
 
 ```{r}
-create("/neighbor", dir = TRUE)
+client$create("/neighbor", dir = TRUE)
 ```
 
 ## Create a key
 
 ```{r echo=FALSE, results='hide'}
-out <- tryCatch(key("/mykey"), error=function(e) e)
-if(!is(out, "http_error")) delete("/mykey")
-out <- tryCatch(key("/stuff"), error=function(e) e)
-if(!is(out, "http_error")) delete("/stuff")
+out <- tryCatch(client$key("/mykey"), error=function(e) e)
+if (!is(out, "http_error")) client$delete("/mykey")
+out <- tryCatch(client$key("/stuff"), error=function(e) e)
+if (!is(out, "http_error")) client$delete("/stuff")
 ```
 
 ```{r}
-create(key = "/mykey", value = "this is awesome")
+client$create(key = "/mykey", value = "this is awesome")
 ```
 
 ```{r echo=FALSE, results='hide'}
@@ -112,13 +136,13 @@ Sys.sleep(3)
 Use `ttl` parameter to make it dissappear after `x` seconds
 
 ```{r}
-create(key = "/stuff", value = "tables", ttl = 5)
+client$create(key = "/stuff", value = "tables", ttl = 5)
 ```
 
 And the key will be gone after 5 seconds, see:
 
 ```{r eval=FALSE}
-key("/stuff")
+client$key("/stuff")
 #> Error in etcd_GET(sprintf("%s%s/%s/", etcdbase(), "keys", key), ...) :
 #>   client error: (404) Not Found
 ```
@@ -126,46 +150,46 @@ key("/stuff")
 ## Update a key
 
 ```{r echo=FALSE, results='hide'}
-out <- tryCatch(key("/foo"), error=function(e) e)
-if(!is(out, "http_error")) delete("/foo")
+out <- tryCatch(client$key("/foo"), error=function(e) e)
+if (!is(out, "http_error")) client$delete("/foo")
 ```
 
 Create a key
 
 ```{r}
-create(key = "/foo", value = "bar")
+client$create(key = "/foo", value = "bar")
 ```
 
 Then update the key
 
 ```{r output.lines = 1:10}
-update(key = "/foo", value = "bar stool")
+client$update(key = "/foo", value = "bar stool")
 ```
 
 ## Create in-order keys
 
 ```{r}
-create_inorder("/queue", "thing1")
+client$create_inorder("/queue", "thing1")
 ```
 
 ```{r}
-create_inorder("/queue", "thing2")
+client$create_inorder("/queue", "thing2")
 ```
 
 ```{r}
-create_inorder("/queue", "thing3")
+client$create_inorder("/queue", "thing3")
 ```
 
 ## List keys
 
 ```{r output.lines = 1:10}
-keys()
+client$keys()
 ```
 
 ## List a key
 
 ```{r}
-key("/mykey")
+client$key("/mykey")
 ```
 
 ## Meta
@@ -173,5 +197,6 @@ key("/mykey")
 * Please [report any issues or bugs](https://github.com/ropensci/etseed/issues).
 * License: MIT
 * Citation: execute `citation(package = 'etseed')`
+* Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
 
 [![ropensci_footer](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
