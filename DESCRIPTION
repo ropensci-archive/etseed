@@ -1,15 +1,16 @@
 Package: etseed
 Title: Client for 'etcd', a 'Key-value' Database
-Description: Client to interact with the 'etcd' 'key-value' data store.
-    Functions included for managing directories, keys, nodes, and
-    getting statistics, and more.
-Version: 0.0.8.9000
+Description: Client to interact with the 'etcd' 'key-value' data store
+    <https://github.com/coreos/etcd>. Functions included for managing
+    directories, keys, nodes, and getting statistics.
+Version: 0.0.9.9000
 License: MIT + file LICENSE
 URL: https://github.com/ropensci/etseed
 BugReports: https://github.com/ropensci/etseed/issues
 Authors@R: c(person("Scott", "Chamberlain", role = c("aut", "cre"),
     email = "myrmecocystus@gmail.com"))
 LazyData: true
+VignetteBuilder: knitr
 Imports:
     httr (>= 1.2.0),
     jsonlite (>= 1.0),
