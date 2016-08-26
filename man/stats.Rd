@@ -3,9 +3,6 @@
 \name{stats}
 \alias{stats}
 \title{Get etcd statistics}
-\usage{
-stats(which = "leader", pretty = TRUE, ...)
-}
 \arguments{
 \item{which}{(character) one of leader (default), self, or store}
 
@@ -21,18 +18,21 @@ Get etcd statistics
 }
 \examples{
 \dontrun{
+# make a client
+cli <- etcd()
+
 # leader stats
-stats()
+cli$stats()
 
 # self stats
-stats("self")
+cli$stats("self")
 
 # store stats
-stats("store")
+cli$stats("store")
 
 # Prety or not
-stats(pretty = TRUE)
-stats(pretty = FALSE)
+cli$stats(pretty = TRUE)
+cli$stats(pretty = FALSE)
 }
 }
 
