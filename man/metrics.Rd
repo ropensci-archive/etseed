@@ -21,7 +21,7 @@ Get etcd metrics
 cli <- etcd()
 
 cli$metrics()
-cli$metrics(FALSE)
+cli$metrics(pretty = FALSE)
 }
 }
 

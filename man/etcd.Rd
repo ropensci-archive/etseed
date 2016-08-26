@@ -144,7 +144,7 @@ etcd(host = 'v3')
 etcd(scheme = 'https')
 
 # don't allow redirects
-etcd(allow_redirects = FALSE)
+etcd(allow_redirect = FALSE)
 }
 }
 
