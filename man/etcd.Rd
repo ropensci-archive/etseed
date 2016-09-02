@@ -18,6 +18,9 @@ etcd(host = "127.0.0.1", port = 2379, api_version = "v2",
 
 \item{scheme}{(character) http scheme, one of http or https. Default: http}
 }
+\value{
+Various output, see help files for each grouping of methods.
+}
 \description{
 etseed client
 }
@@ -41,73 +44,73 @@ whether to allow redirects, and the http scheme.
      check the etcd version
     }
     \item{\code{keys()}}{
-     list keys
+     list keys, see also \code{\link{keys}}
     }
     \item{\code{key()}}{
-     get a key
+     get a key, see also \code{\link{keys}}
     }
     \item{\code{create()}}{
-     create a key
+     create a key, see also \code{\link{keys}}
     }
     \item{\code{delete()}}{
-     delete a key
+     delete a key, see also \code{\link{keys}}
     }
     \item{\code{update()}}{
-     update a key
+     update a key, see also \code{\link{keys}}
     }
     \item{\code{create_inorder()}}{
-     create a key in order
+     create a key in order, see also \code{\link{keys}}
     }
     \item{\code{metrics()}}{
-     see metrics
+     see metrics, see also \code{\link{metrics}}
     }
     \item{\code{stats()}}{
-     see stats
+     see stats, see also \code{\link{stats}}
     }
     \item{\code{user_add()}}{
-     add a user
+     add a user, see also \code{\link{users}}
     }
     \item{\code{user_list()}}{
-     list users
+     list users, see also \code{\link{users}}
     }
     \item{\code{user_get()}}{
-     get a user
+     get a user, see also \code{\link{users}}
     }
     \item{\code{user_delete()}}{
-     delete a user
+     delete a user, see also \code{\link{users}}
     }
     \item{\code{member_list()}}{
-     list members
+     list members, see also \code{\link{members}}
     }
     \item{\code{member_add()}}{
-     add a member
+     add a member, see also \code{\link{members}}
     }
     \item{\code{member_change()}}{
-     change a member
+     change a member, see also \code{\link{members}}
     }
     \item{\code{member_delete()}}{
-     delete a member
+     delete a member, see also \code{\link{members}}
     }
     \item{\code{role_add()}}{
-     add a role
+     add a role, see also \code{\link{roles}}
     }
     \item{\code{role_list()}}{
-     list roles
+     list roles, see also \code{\link{roles}}
     }
     \item{\code{role_get()}}{
-     get a role
+     get a role, see also \code{\link{roles}}
     }
     \item{\code{role_delete()}}{
-     delete a role
+     delete a role, see also \code{\link{roles}}
     }
     \item{\code{auth_status()}}{
-     authentication status
+     authentication status, see also \code{\link{auth}}
     }
     \item{\code{auth_enable()}}{
-     enable authentication
+     enable authentication, see also \code{\link{auth}}
     }
     \item{\code{auth_disable()}}{
-     disable authentication
+     disable authentication, see also \code{\link{auth}}
     }
   }
 }

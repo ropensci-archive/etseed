@@ -82,7 +82,7 @@ using etcd API version 2, with an `http` scheme.
 ```r
 client$version()
 #> $etcdserver
-#> [1] "3.0.4"
+#> [1] "3.0.7"
 #> 
 #> $etcdcluster
 #> [1] "3.0.0"
@@ -106,10 +106,10 @@ client$create("/neighbor", dir = TRUE)
 #> [1] TRUE
 #> 
 #> $node$modifiedIndex
-#> [1] 182
+#> [1] 4
 #> 
 #> $node$createdIndex
-#> [1] 182
+#> [1] 4
 ```
 
 ## Create a key
@@ -130,10 +130,10 @@ client$create(key = "/mykey", value = "this is awesome")
 #> [1] "this is awesome"
 #> 
 #> $node$modifiedIndex
-#> [1] 184
+#> [1] 5
 #> 
 #> $node$createdIndex
-#> [1] 184
+#> [1] 5
 ```
 
 
@@ -154,16 +154,16 @@ client$create(key = "/stuff", value = "tables", ttl = 5)
 #> [1] "tables"
 #> 
 #> $node$expiration
-#> [1] "2016-08-26T00:20:47.817598188Z"
+#> [1] "2016-09-02T21:40:13.963735167Z"
 #> 
 #> $node$ttl
 #> [1] 5
 #> 
 #> $node$modifiedIndex
-#> [1] 185
+#> [1] 6
 #> 
 #> $node$createdIndex
-#> [1] 185
+#> [1] 6
 ```
 
 And the key will be gone after 5 seconds, see:
@@ -195,10 +195,10 @@ client$create(key = "/foo", value = "bar")
 #> [1] "bar"
 #> 
 #> $node$modifiedIndex
-#> [1] 186
+#> [1] 7
 #> 
 #> $node$createdIndex
-#> [1] 186
+#> [1] 7
 ```
 
 Then update the key
@@ -224,19 +224,61 @@ client$update(key = "/foo", value = "bar stool")
 
 ```r
 client$create_inorder("/queue", "thing1")
-#> Error in etcd_POST(sprintf("%s%s%s", private$make_url(), "keys", check_key(key)), : Not Found (HTTP 404).
+#> $action
+#> [1] "create"
+#> 
+#> $node
+#> $node$key
+#> [1] "/queue/00000000000000000009"
+#> 
+#> $node$value
+#> [1] "thing1"
+#> 
+#> $node$modifiedIndex
+#> [1] 9
+#> 
+#> $node$createdIndex
+#> [1] 9
 ```
 
 
 ```r
 client$create_inorder("/queue", "thing2")
-#> Error in etcd_POST(sprintf("%s%s%s", private$make_url(), "keys", check_key(key)), : Not Found (HTTP 404).
+#> $action
+#> [1] "create"
+#> 
+#> $node
+#> $node$key
+#> [1] "/queue/00000000000000000010"
+#> 
+#> $node$value
+#> [1] "thing2"
+#> 
+#> $node$modifiedIndex
+#> [1] 10
+#> 
+#> $node$createdIndex
+#> [1] 10
 ```
 
 
 ```r
 client$create_inorder("/queue", "thing3")
-#> Error in etcd_POST(sprintf("%s%s%s", private$make_url(), "keys", check_key(key)), : Not Found (HTTP 404).
+#> $action
+#> [1] "create"
+#> 
+#> $node
+#> $node$key
+#> [1] "/queue/00000000000000000011"
+#> 
+#> $node$value
+#> [1] "thing3"
+#> 
+#> $node$modifiedIndex
+#> [1] 11
+#> 
+#> $node$createdIndex
+#> [1] 11
 ```
 
 ## List keys
@@ -273,10 +315,10 @@ client$key("/mykey")
 #> [1] "this is awesome"
 #> 
 #> $node$modifiedIndex
-#> [1] 184
+#> [1] 5
 #> 
 #> $node$createdIndex
-#> [1] 184
+#> [1] 5
 ```
 
 ## Meta

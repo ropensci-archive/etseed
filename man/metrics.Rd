@@ -10,7 +10,8 @@ Default: \code{TRUE}}
 \item{...}{Further args passed on to \code{\link[httr]{GET}}}
 }
 \value{
-Prints a human readable text representation to console.
+Prints a human readable text representation to console
+of the metrics of your etcd cluster
 }
 \description{
 Get etcd metrics

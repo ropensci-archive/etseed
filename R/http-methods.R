@@ -51,6 +51,14 @@ auth_PUT <- function(url, ...) {
   contutf8(tt)
 }
 
+auth_PUT2 <- function(url, ...) {
+  tt <- PUT(url, ..., encode = "form")
+  if (tt$status_code > 201) {
+    stop(content(tt)$message, call. = FALSE)
+  }
+  contutf8(tt)
+}
+
 auth_DELETE <- function(url, args, ...) {
   if (length(args) == 0) args <- NULL
   res <- DELETE(url, query = args, ...)

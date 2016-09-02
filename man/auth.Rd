@@ -2,16 +2,34 @@
 % Please edit documentation in R/auth.R
 \name{auth}
 \alias{auth}
+\alias{auth_disable}
+\alias{auth_enable}
+\alias{auth_status}
 \title{etcd authentication - auth control}
 \arguments{
-\item{auth_user, auth_pwd}{(character) Username and password for the authenticated user,
-the root user}
+\item{auth_user, auth_pwd}{(character) Username and password for the
+authenticated user, the root user}
 
 \item{...}{Further args passed on to \code{\link[httr]{GET}},
 \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
 }
+\value{
+see return for each method
+}
 \description{
 etcd authentication - auth control
+}
+\section{Methods}{
+
+\itemize{
+ \item auth_status: get authentication status, returns single boolean,
+ \code{TRUE} indicates authentication enabled, and \code{FALSE}
+ authentication disabled
+ \item auth_enable: enable authentication, returns single boolean,
+ \code{TRUE} indicates authentication enable request worked
+ \item auth_disable: disable authentication, returns single boolean,
+ \code{TRUE} indicates authentication disable request worked
+}
 }
 \examples{
 \dontrun{

@@ -11,7 +11,9 @@
 \item{...}{Further args passed on to \code{\link[httr]{GET}}}
 }
 \value{
-Prints a human readable text representation to console.
+Prints a human readable text representation to console. If
+\code{pretty = TRUE} (default), retunrs a list, but if \code{pretty = FALSE}
+returns JSON data.
 }
 \description{
 Get etcd statistics

@@ -8,6 +8,10 @@
 \description{
 etcd client for R
 }
+\section{etcd keys}{
+
+Note that all keys have to be prefixed by a forward slash (\code{/})
+}
 \author{
 Scott Chamberlain \email{myrmecocystus@gmail.com}
 }

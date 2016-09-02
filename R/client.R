@@ -9,6 +9,8 @@
 #' @param allow_redirect (logical) Allow redirects? Default: \code{TRUE}
 #' @param scheme (character) http scheme, one of http or https. Default: http
 #'
+#' @return Various output, see help files for each grouping of methods.
+#'
 #' @details \code{etcd} creates a R6 class object. The object is
 #' not cloneable and is portable, so it can be inherited across packages
 #' without complication.
@@ -27,73 +29,73 @@
 #'      check the etcd version
 #'     }
 #'     \item{\code{keys()}}{
-#'      list keys
+#'      list keys, see also \code{\link{keys}}
 #'     }
 #'     \item{\code{key()}}{
-#'      get a key
+#'      get a key, see also \code{\link{keys}}
 #'     }
 #'     \item{\code{create()}}{
-#'      create a key
+#'      create a key, see also \code{\link{keys}}
 #'     }
 #'     \item{\code{delete()}}{
-#'      delete a key
+#'      delete a key, see also \code{\link{keys}}
 #'     }
 #'     \item{\code{update()}}{
-#'      update a key
+#'      update a key, see also \code{\link{keys}}
 #'     }
 #'     \item{\code{create_inorder()}}{
-#'      create a key in order
+#'      create a key in order, see also \code{\link{keys}}
 #'     }
 #'     \item{\code{metrics()}}{
-#'      see metrics
+#'      see metrics, see also \code{\link{metrics}}
 #'     }
 #'     \item{\code{stats()}}{
-#'      see stats
+#'      see stats, see also \code{\link{stats}}
 #'     }
 #'     \item{\code{user_add()}}{
-#'      add a user
+#'      add a user, see also \code{\link{users}}
 #'     }
 #'     \item{\code{user_list()}}{
-#'      list users
+#'      list users, see also \code{\link{users}}
 #'     }
 #'     \item{\code{user_get()}}{
-#'      get a user
+#'      get a user, see also \code{\link{users}}
 #'     }
 #'     \item{\code{user_delete()}}{
-#'      delete a user
+#'      delete a user, see also \code{\link{users}}
 #'     }
 #'     \item{\code{member_list()}}{
-#'      list members
+#'      list members, see also \code{\link{members}}
 #'     }
 #'     \item{\code{member_add()}}{
-#'      add a member
+#'      add a member, see also \code{\link{members}}
 #'     }
 #'     \item{\code{member_change()}}{
-#'      change a member
+#'      change a member, see also \code{\link{members}}
 #'     }
 #'     \item{\code{member_delete()}}{
-#'      delete a member
+#'      delete a member, see also \code{\link{members}}
 #'     }
 #'     \item{\code{role_add()}}{
-#'      add a role
+#'      add a role, see also \code{\link{roles}}
 #'     }
 #'     \item{\code{role_list()}}{
-#'      list roles
+#'      list roles, see also \code{\link{roles}}
 #'     }
 #'     \item{\code{role_get()}}{
-#'      get a role
+#'      get a role, see also \code{\link{roles}}
 #'     }
 #'     \item{\code{role_delete()}}{
-#'      delete a role
+#'      delete a role, see also \code{\link{roles}}
 #'     }
 #'     \item{\code{auth_status()}}{
-#'      authentication status
+#'      authentication status, see also \code{\link{auth}}
 #'     }
 #'     \item{\code{auth_enable()}}{
-#'      enable authentication
+#'      enable authentication, see also \code{\link{auth}}
 #'     }
 #'     \item{\code{auth_disable()}}{
-#'      disable authentication
+#'      disable authentication, see also \code{\link{auth}}
 #'     }
 #'   }
 #'
@@ -205,7 +207,7 @@ EtcdClient <- R6::R6Class(
     },
 
     create_inorder = function(key, value, ttl = NULL, ...) {
-      etcd_parse(etcd_POST(sprintf("%s%s%s", private$make_url(), "keys", check_key(key)), value, ttl, ...))
+      etcd_parse(etcd_POST(sprintf("%s/%s%s", private$make_url(), "keys", check_key(key)), value, ttl, ...))
     },
 
     # metrics
@@ -284,13 +286,16 @@ EtcdClient <- R6::R6Class(
                          revoke_read = NULL, revoke_write = NULL,
                          auth_user, auth_pwd, ...) {
 
-      args <- etc(list(role = role,
-                       permissions = list(kv = list(read = perm_read, write = perm_write)),
-                       grant = list(kv = list(read = grant_read, write = grant_write)),
-                       revoke = list(kv = list(read = revoke_read, write = revoke_write))
+      args <- Filter(function(x) length(x[[1]]) > 0, list(
+        role = unbox(role),
+        permissions = list(kv = etc(list(read = perm_read, write = perm_write))),
+        grant = list(kv = etc(list(read = grant_read, write = grant_write))),
+        revoke = list(kv = etc(list(read = revoke_read, write = revoke_write)))
       ))
-      auth_PUT(paste0(private$make_url(), paste0("/auth/roles/", role)),
+      #json <- jsonlite::toJSON(args)
+      res <- auth_PUT(paste0(private$make_url(), paste0("/auth/roles/", role)),
                body = args, make_auth(auth_user, auth_pwd), ...)
+      jsonlite::fromJSON(res)
     },
 
     role_list = function(...) {
@@ -311,7 +316,7 @@ EtcdClient <- R6::R6Class(
     # auth
     auth_status = function(...) {
       res <- etcd_GET(paste0(private$make_url(), "/auth/enable"), NULL, ...)
-      jsonlite::fromJSON(res)
+      jsonlite::fromJSON(res)$enabled
     },
 
     auth_enable = function(auth_user, auth_pwd, ...) {

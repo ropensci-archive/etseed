@@ -1,6 +1,7 @@
 #' List a key or all keys
 #'
 #' @name keys
+#' @aliases key create create_in_order delete update
 #'
 #' @param key (character) A key name. Optional.
 #' @param value Any object to store. Required for \code{create}, \code{update},
@@ -11,9 +12,26 @@
 #' @param prevIndex (integer) Previous index to match against.
 #' @param ttl (integer) Seconds after which the key will be removed.
 #' @param dir (logical) Whether to crate or delete a directory or not
-#' @param wait (logical) Whether to wait or not for a key change. Deafult: \code{FALSE}
+#' @param wait (logical) Whether to wait or not for a key change.
+#' Deafult: \code{FALSE}
 #' @param wait_index (integer) Index to wait until
 #' @param ... Further args passed on to \code{\link[httr]{GET}}
+#'
+#' @return All return a list, with named slots 'action' and 'node'. If
+#' the key previously existed, or is deleted, or updated,
+#' you get an addition slot 'prevNode'. The action slot tells you
+#' what action you took. the 'node' slot gives the key name, its
+#' value, a 'modifiedIndex' and a 'createdIndex'
+#'
+#' @section Methods:
+#' \itemize{
+#'  \item key: get a single key
+#'  \item keys: get all keys
+#'  \item create: create a key
+#'  \item create_in_order: create a key in order
+#'  \item update: update a key
+#'  \item delete: delete a key
+#' }
 #'
 #' @section Headers:
 #' You can get header info on requests via curl options like
@@ -31,6 +49,9 @@
 #'  (\url{https://github.com/coreos/etcd/blob/master/Documentation/tuning.md}) section
 #'  for details.
 #' }
+#'
+#' @section Setting a key from file:
+#' Note that setting a key from a file is not working yet.
 #'
 #' @examples \dontrun{
 #' # make a client
@@ -105,7 +126,7 @@
 #' cli$keys()
 #'
 #' # Set a key from a file
-#' cat("hello\nworld", file = "myfile.txt")
-#' cli$create("/myfile", file = file)
+#' # cat("hello\nworld", file = "myfile.txt")
+#' # cli$create("/myfile", file = file)
 #' }
 NULL
