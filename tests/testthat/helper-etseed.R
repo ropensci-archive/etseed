@@ -12,3 +12,5 @@ delete_all_keys <- function(x) {
     }
   })
 }
+
+load("words.rda")
