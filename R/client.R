@@ -1,8 +1,6 @@
 #' etseed client
 #'
 #' @export
-#' @name etcd
-#'
 #' @param host (character) Host url. Deafault: 127.0.0.1
 #' @param port (character/numeric) Port. Default: 2379
 #' @param api_version (characrter) etcd API version. Default: 'v2'
