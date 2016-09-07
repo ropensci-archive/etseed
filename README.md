@@ -3,8 +3,8 @@ etseed
 
 
 
-<!-- [![Build Status](https://api.travis-ci.org/ropensci/etseed.png)](https://travis-ci.org/ropensci/etseed)
-[![Build status](https://ci.appveyor.com/api/projects/status/80oy29dhgw3tvy4k?svg=true)](https://ci.appveyor.com/project/sckott/etseed-04dte)
+[![Build Status](https://travis-ci.org/ropensci/etseed.svg?branch=master)](https://travis-ci.org/ropensci/etseed)
+<!-- [![Build status](https://ci.appveyor.com/api/projects/status/80oy29dhgw3tvy4k?svg=true)](https://ci.appveyor.com/project/sckott/etseed-04dte)
 [![codecov.io](https://codecov.io/github/ropensci/etseed/coverage.svg?branch=master)](https://codecov.io/github/ropensci/etseed?branch=master)
 -->
 
@@ -15,7 +15,7 @@ __etcd R client__
 [etcd API docs](https://github.com/coreos/etcd/blob/master/Documentation/v2/api.md)
 
 Development follows closely the newest version of `etcd` released by the Coreos folks. As of 
-2016-08-24 that's `etcd v3.0.4`
+2016-09-07 that's `etcd v3.0.7`
 
 ## Installing etcd
 
@@ -106,10 +106,10 @@ client$create("/neighbor", dir = TRUE)
 #> [1] TRUE
 #> 
 #> $node$modifiedIndex
-#> [1] 4
+#> [1] 156
 #> 
 #> $node$createdIndex
-#> [1] 4
+#> [1] 156
 ```
 
 ## Create a key
@@ -130,10 +130,10 @@ client$create(key = "/mykey", value = "this is awesome")
 #> [1] "this is awesome"
 #> 
 #> $node$modifiedIndex
-#> [1] 5
+#> [1] 158
 #> 
 #> $node$createdIndex
-#> [1] 5
+#> [1] 158
 ```
 
 
@@ -154,16 +154,16 @@ client$create(key = "/stuff", value = "tables", ttl = 5)
 #> [1] "tables"
 #> 
 #> $node$expiration
-#> [1] "2016-09-02T21:40:13.963735167Z"
+#> [1] "2016-09-07T17:21:08.993528228Z"
 #> 
 #> $node$ttl
 #> [1] 5
 #> 
 #> $node$modifiedIndex
-#> [1] 6
+#> [1] 159
 #> 
 #> $node$createdIndex
-#> [1] 6
+#> [1] 159
 ```
 
 And the key will be gone after 5 seconds, see:
@@ -195,10 +195,10 @@ client$create(key = "/foo", value = "bar")
 #> [1] "bar"
 #> 
 #> $node$modifiedIndex
-#> [1] 7
+#> [1] 161
 #> 
 #> $node$createdIndex
-#> [1] 7
+#> [1] 161
 ```
 
 Then update the key
@@ -229,16 +229,16 @@ client$create_inorder("/queue", "thing1")
 #> 
 #> $node
 #> $node$key
-#> [1] "/queue/00000000000000000009"
+#> [1] "/queue/00000000000000000163"
 #> 
 #> $node$value
 #> [1] "thing1"
 #> 
 #> $node$modifiedIndex
-#> [1] 9
+#> [1] 163
 #> 
 #> $node$createdIndex
-#> [1] 9
+#> [1] 163
 ```
 
 
@@ -249,16 +249,16 @@ client$create_inorder("/queue", "thing2")
 #> 
 #> $node
 #> $node$key
-#> [1] "/queue/00000000000000000010"
+#> [1] "/queue/00000000000000000164"
 #> 
 #> $node$value
 #> [1] "thing2"
 #> 
 #> $node$modifiedIndex
-#> [1] 10
+#> [1] 164
 #> 
 #> $node$createdIndex
-#> [1] 10
+#> [1] 164
 ```
 
 
@@ -269,16 +269,16 @@ client$create_inorder("/queue", "thing3")
 #> 
 #> $node
 #> $node$key
-#> [1] "/queue/00000000000000000011"
+#> [1] "/queue/00000000000000000165"
 #> 
 #> $node$value
 #> [1] "thing3"
 #> 
 #> $node$modifiedIndex
-#> [1] 11
+#> [1] 165
 #> 
 #> $node$createdIndex
-#> [1] 11
+#> [1] 165
 ```
 
 ## List keys
@@ -315,10 +315,10 @@ client$key("/mykey")
 #> [1] "this is awesome"
 #> 
 #> $node$modifiedIndex
-#> [1] 5
+#> [1] 158
 #> 
 #> $node$createdIndex
-#> [1] 5
+#> [1] 158
 ```
 
 ## Meta
