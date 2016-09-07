@@ -3,6 +3,9 @@ context("etseed keys: create")
 client <- etcd()
 
 test_that("keys - create basic method works correctly", {
+  skip_on_cran()
+  skip_on_travis()
+
   invisible(suppressWarnings(client$delete(key = "/stuff")))
 
   aa <- client$create(key="/stuff", value="and things")
@@ -20,6 +23,9 @@ test_that("keys - create basic method works correctly", {
 })
 
 test_that("keys - create, ttl param works correctly", {
+  skip_on_cran()
+  skip_on_travis()
+
   invisible(suppressWarnings(client$delete(key = "/yeppers")))
 
   aa <- client$create(key="/yeppers", value="peppers", ttl = 2)
@@ -32,6 +38,9 @@ test_that("keys - create, ttl param works correctly", {
 })
 
 test_that("keys - create, dir param works correctly", {
+  skip_on_cran()
+  skip_on_travis()
+
   invisible(suppressWarnings(client$delete(key = "/thedir", dir = TRUE)))
 
   aa <- client$create(key = "/thedir", dir = TRUE)
@@ -51,6 +60,9 @@ test_that("keys - create, dir param works correctly", {
 })
 
 test_that("keys - create, file param works correctly", {
+  skip_on_cran()
+  skip_on_travis()
+
   invisible(suppressWarnings(client$delete(key = "/myfile")))
   cat("hello\nworld", file = "myfile.txt")
   expect_error(client$create(key = "/myfile", file = file),

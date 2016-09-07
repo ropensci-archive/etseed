@@ -3,6 +3,9 @@ context("etseed keys: delete")
 client <- etcd()
 
 test_that("keys - delete basic method works correctly", {
+  skip_on_cran()
+  skip_on_travis()
+
   # create randomly named key so it shouldn't exist already
   key <- paste0("/", paste0(sample(letters, 9), collapse = ""))
   invisible(client$create(key = key, value = "moon cow and saturn cheese"))
@@ -26,6 +29,9 @@ test_that("keys - delete basic method works correctly", {
 })
 
 test_that("keys - delete, dir param works correctly", {
+  skip_on_cran()
+  skip_on_travis()
+
   invisible(suppressWarnings(client$create(key = "/yodir", dir = TRUE)))
 
   # deleting a dir doesn't work unless `dir=TRUE`

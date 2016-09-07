@@ -3,6 +3,9 @@ context("etseed keys: keys")
 client <- etcd()
 
 test_that("keys - keys basic method works correctly", {
+  skip_on_cran()
+  skip_on_travis()
+
   # create some key/value pairs
   keys <- replicate(10, paste0("/", paste0(sample(letters, 9), collapse = "")))
   values <- replicate(10, paste0(sample(words, 10), collapse = " "))
@@ -30,6 +33,9 @@ test_that("keys - keys basic method works correctly", {
 })
 
 test_that("keys - recursive param works correctly", {
+  skip_on_cran()
+  skip_on_travis()
+
   invisible(delete_all_keys(client))
 
   key <- make_key()
@@ -54,6 +60,9 @@ test_that("keys - recursive param works correctly", {
 })
 
 test_that("keys - sorted param works correctly", {
+  skip_on_cran()
+  skip_on_travis()
+
   invisible(delete_all_keys(client))
 
   key <- make_key()

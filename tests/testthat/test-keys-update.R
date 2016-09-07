@@ -3,6 +3,9 @@ context("etseed keys: update")
 client <- etcd()
 
 test_that("keys - update basic method works correctly", {
+  skip_on_cran()
+  skip_on_travis()
+
   # create randomly named key so it shouldn't exist already
   key <- paste0("/", paste0(sample(letters, 9), collapse = ""))
   invisible(client$create(key = key, value = "moon cow and saturn cheese"))
@@ -27,6 +30,9 @@ test_that("keys - update basic method works correctly", {
 })
 
 test_that("keys - update, ttl param works correctly", {
+  skip_on_cran()
+  skip_on_travis()
+
   key <- paste0("/", paste0(sample(letters, 9), collapse = ""))
 
   invisible(suppressWarnings(client$create(key = key, value = "aaa")))

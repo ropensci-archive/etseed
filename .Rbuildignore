@@ -4,7 +4,6 @@ README.Rmd
 .travis.yml
 appveyor.yml
 build_etcd.sh
-etcd/*
 etseed/etcd/gopath/src/github.com/coreos/etcd
 ^CONDUCT\.md$
 tests/test-all.R

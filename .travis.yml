@@ -1,13 +1,7 @@
 language: r
 cache: packages
-sudo: required
+sudo: false
 latex: false
-
-before_install:
-  - sudo add-apt-repository ppa:ubuntu-lxc/lxd-stable -y
-  - sudo apt-get install golang -y
-  - export GOPATH=$HOME/go
-  - ./build_etcd.sh v3.0.6
 
 notifications:
   slack:

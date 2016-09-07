@@ -1,6 +1,9 @@
 context("etseed client")
 
 test_that("etcd static variables set correctly", {
+  skip_on_cran()
+  skip_on_travis()
+
   aa <- etcd()
 
   expect_is(aa, "EtcdClient")

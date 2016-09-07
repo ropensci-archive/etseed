@@ -1,6 +1,9 @@
 context("version")
 
 test_that("etcd version method works", {
+	skip_on_cran()
+  skip_on_travis()
+
   aa <- etcd()
 
   res <- aa$version()
