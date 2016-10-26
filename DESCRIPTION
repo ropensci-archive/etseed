@@ -3,7 +3,7 @@ Title: Client for 'etcd', a 'Key-value' Database
 Description: Client to interact with the 'etcd' 'key-value' data store
     <https://github.com/coreos/etcd>. Functions included for managing
     directories, keys, nodes, and getting statistics.
-Version: 0.1.0
+Version: 0.1.0.9000
 License: MIT + file LICENSE
 URL: https://github.com/ropensci/etseed
 BugReports: https://github.com/ropensci/etseed/issues
