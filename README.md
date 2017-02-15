@@ -6,6 +6,7 @@ etseed
 [![Build Status](https://travis-ci.org/ropensci/etseed.svg?branch=master)](https://travis-ci.org/ropensci/etseed)
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/etseed)](https://github.com/metacran/cranlogs.app)
 [![cran version](http://www.r-pkg.org/badges/version/etseed)](https://cran.r-project.org/package=etseed)
+[![codecov.io](https://codecov.io/github/ropensci/etseed/coverage.svg?branch=master)](https://codecov.io/github/ropensci/etseed?branch=master)
 
 __etcd R client__
 
