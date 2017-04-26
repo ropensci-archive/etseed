@@ -9,3 +9,5 @@ etseed/etcd/gopath/src/github.com/coreos/etcd
 tests/test-all.R
 ^Makefile$
 ^cran-comments\.md$
+.github
+
