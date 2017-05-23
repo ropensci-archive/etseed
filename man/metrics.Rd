@@ -25,4 +25,3 @@ cli$metrics()
 cli$metrics(pretty = FALSE)
 }
 }
-

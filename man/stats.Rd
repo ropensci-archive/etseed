@@ -37,4 +37,3 @@ cli$stats(pretty = TRUE)
 cli$stats(pretty = FALSE)
 }
 }
-

@@ -114,6 +114,7 @@ whether to allow redirects, and the http scheme.
     }
   }
 }
+
 \examples{
 \dontrun{
 # make a client
@@ -150,4 +151,3 @@ etcd(scheme = 'https')
 etcd(allow_redirect = FALSE)
 }
 }
-

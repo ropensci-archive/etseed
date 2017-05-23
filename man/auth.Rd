@@ -2,9 +2,9 @@
 % Please edit documentation in R/auth.R
 \name{auth}
 \alias{auth}
-\alias{auth_disable}
-\alias{auth_enable}
 \alias{auth_status}
+\alias{auth_enable}
+\alias{auth_disable}
 \title{etcd authentication - auth control}
 \arguments{
 \item{auth_user, auth_pwd}{(character) Username and password for the
@@ -31,6 +31,7 @@ etcd authentication - auth control
  \code{TRUE} indicates authentication disable request worked
 }
 }
+
 \examples{
 \dontrun{
 # make a client
@@ -63,4 +64,3 @@ cli$user_get("jane")
 cli$user_delete("jane", "root", "pickbetterpwd")
 }
 }
-

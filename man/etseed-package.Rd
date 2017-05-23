@@ -2,8 +2,8 @@
 % Please edit documentation in R/etseed-package.R
 \docType{package}
 \name{etseed-package}
-\alias{etseed}
 \alias{etseed-package}
+\alias{etseed}
 \title{etcd client for R}
 \description{
 etcd client for R
@@ -12,8 +12,8 @@ etcd client for R
 
 Note that all keys have to be prefixed by a forward slash (\code{/})
 }
+
 \author{
 Scott Chamberlain \email{myrmecocystus@gmail.com}
 }
 \keyword{package}
-
