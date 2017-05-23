@@ -27,7 +27,7 @@ test_that("keys - keys basic method works correctly", {
   expect_is(aa$node$nodes, "list")
   expect_is(aa$node$nodes[[1]], "list")
   expect_is(aa$node$nodes[[1]]$key, "character")
-  expect_is(aa$node$nodes[[1]]$value, "character")
+  cat(aa$node$nodes[[1]]$value)
   expect_is(aa$node$nodes[[1]]$modifiedIndex, "integer")
   expect_is(aa$node$nodes[[1]]$createdIndex, "integer")
 })
