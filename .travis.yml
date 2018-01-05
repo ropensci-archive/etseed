@@ -2,6 +2,7 @@ language: r
 cache: packages
 sudo: false
 latex: false
+dist: trusty
 
 after_success:
 - Rscript -e 'covr::codecov()'
