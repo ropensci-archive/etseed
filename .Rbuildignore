@@ -11,3 +11,4 @@ tests/test-all.R
 ^cran-comments\.md$
 .github
 
+^codemeta\.json$

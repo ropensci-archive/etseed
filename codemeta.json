@@ -1,0 +1,116 @@
+{
+  "@context": ["http://purl.org/codemeta/2.0", "http://schema.org"],
+  "@type": "SoftwareSourceCode",
+  "identifier": "etseed",
+  "description": "Client to interact with the 'etcd' 'key-value' data store\n    <https://github.com/coreos/etcd>. Functions included for managing\n    directories, keys, nodes, and getting statistics.",
+  "name": "etseed: Client for 'etcd', a 'Key-value' Database",
+  "codeRepository": "https://github.com/ropensci/etseed",
+  "issueTracker": "https://github.com/ropensci/etseed/issues",
+  "license": "https://spdx.org/licenses/MIT",
+  "version": "0.1.0.9410",
+  "programmingLanguage": {
+    "@type": "ComputerLanguage",
+    "name": "R",
+    "version": "3.4.3",
+    "url": "https://r-project.org"
+  },
+  "runtimePlatform": "R version 3.4.3 Patched (2018-01-01 r74017)",
+  "provider": {
+    "@id": "https://cran.r-project.org",
+    "@type": "Organization",
+    "name": "Central R Archive Network (CRAN)",
+    "url": "https://cran.r-project.org"
+  },
+  "author": [
+    {
+      "@type": "Person",
+      "givenName": "Scott",
+      "familyName": "Chamberlain",
+      "email": "myrmecocystus@gmail.com"
+    }
+  ],
+  "maintainer": {
+    "@type": "Person",
+    "givenName": "Scott",
+    "familyName": "Chamberlain",
+    "email": "myrmecocystus@gmail.com"
+  },
+  "softwareSuggestions": [
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "roxygen2",
+      "name": "roxygen2",
+      "version": "6.0.1",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "knitr",
+      "name": "knitr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "testthat",
+      "name": "testthat",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
+    }
+  ],
+  "softwareRequirements": [
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "httr",
+      "name": "httr",
+      "version": "1.2.0",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "jsonlite",
+      "name": "jsonlite",
+      "version": "1.0",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "R6",
+      "name": "R6",
+      "version": "2.1.3",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
+    }
+  ],
+  "contIntegration": "https://travis-ci.org/ropensci/etseed",
+  "releaseNotes": "https://github.com/ropensci/etseed/blob/master/NEWS.md",
+  "readme": "https://github.com/ropensci/etseed/blob/master/README.md",
+  "fileSize": "25.805KB"
+}
