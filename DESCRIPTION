@@ -14,7 +14,8 @@ VignetteBuilder: knitr
 Imports:
     httr (>= 1.2.0),
     jsonlite (>= 1.0),
-    R6 (>= 2.1.3)
+    R6 (>= 2.1.3),
+    urltools (>= 1.7.0)
 Suggests:
     roxygen2 (>= 6.0.1),
     knitr,
