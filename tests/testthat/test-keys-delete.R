@@ -7,7 +7,7 @@ test_that("keys - delete basic method works correctly", {
   skip_on_travis()
 
   # create randomly named key so it shouldn't exist already
-  key <- paste0("/", paste0(sample(letters, 9), collapse = ""))
+  key <- paste0("/", paste0(sample(c(letters,' ','@'), 9), collapse = ""))
   invisible(client$create(key = key, value = "moon cow and saturn cheese"))
 
   aa <- client$delete(key = key)

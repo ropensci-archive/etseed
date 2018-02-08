@@ -7,7 +7,7 @@ test_that("keys - update basic method works correctly", {
   skip_on_travis()
 
   # create randomly named key so it shouldn't exist already
-  key <- paste0("/", paste0(sample(letters, 9), collapse = ""))
+  key <- paste0("/", paste0(sample(c(letters,' ','@'), 9), collapse = ""))
   invisible(client$create(key = key, value = "moon cow and saturn cheese"))
 
   aa <- client$update(key = key, value = "saturn cow and moon cheese")
@@ -33,7 +33,7 @@ test_that("keys - update, ttl param works correctly", {
   skip_on_cran()
   skip_on_travis()
 
-  key <- paste0("/", paste0(sample(letters, 9), collapse = ""))
+  key <- paste0("/", paste0(sample(c(letters,' ','@'), 9), collapse = ""))
 
   invisible(suppressWarnings(client$create(key = key, value = "aaa")))
 
