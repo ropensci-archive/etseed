@@ -7,7 +7,7 @@ test_that("keys - keys basic method works correctly", {
   skip_on_travis()
 
   # create some key/value pairs
-  keys <- replicate(10, paste0("/", paste0(sample(letters, 9), collapse = "")))
+  keys <- replicate(10, paste0("/", paste0(sample(c(letters,' ','@'), 9), collapse = "")))
   values <- replicate(10, paste0(sample(words, 10), collapse = " "))
   invisible(
     Map(function(x, y) {

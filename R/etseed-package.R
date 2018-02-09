@@ -6,6 +6,8 @@
 #' @importFrom httr GET PUT POST DELETE content stop_for_status
 #' warn_for_status authenticate
 #' @importFrom jsonlite fromJSON
+#' @importFrom urltools url_encode
+#' @importFrom stats setNames
 #' @name etseed-package
 #' @aliases etseed
 #' @docType package
