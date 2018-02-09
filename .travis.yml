@@ -3,6 +3,7 @@ cache: packages
 sudo: false
 latex: false
 dist: trusty
+warnings_are_errors: false
 
 before_install:
 - ./download_etcd.sh 3.3.0
