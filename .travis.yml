@@ -4,6 +4,9 @@ sudo: false
 latex: false
 dist: trusty
 
+before_install:
+- ./download_etcd.sh 3.3.0
+
 r_github_packages:
 - jimhester/covr
 
