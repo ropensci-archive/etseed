@@ -35,6 +35,7 @@ knitr::opts_chunk$set(
 )
 ```
 
+[![cran checks](https://cranchecks.info/badges/worst/etseed)](https://cranchecks.info/pkgs/etseed)
 [![Build Status](https://travis-ci.org/ropensci/etseed.svg?branch=master)](https://travis-ci.org/ropensci/etseed)
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/etseed)](https://github.com/metacran/cranlogs.app)
 [![cran version](http://www.r-pkg.org/badges/version/etseed)](https://cran.r-project.org/package=etseed)
@@ -44,10 +45,10 @@ __etcd R client__
 
 `etcd` is a key-value DB written in `Go`. It has an HTTP API, which this R package wraps.
 
-[etcd API docs](https://github.com/coreos/etcd/blob/master/Documentation/v2/api.md)
+[etcd API docs](https://github.com/coreos/etcd/blob/master/Documentation/docs.md)
 
 Development follows closely the newest version of `etcd` released by the Coreos folks. As of
-2016-09-07 that's `etcd v3.0.7`
+2018-08-14 that's `etcd v3.3.9`
 
 ## Installing etcd
 
