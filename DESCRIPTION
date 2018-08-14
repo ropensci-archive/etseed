@@ -11,6 +11,8 @@ Authors@R: c(person("Scott", "Chamberlain", role = c("aut", "cre"),
     email = "myrmecocystus@gmail.com"))
 LazyData: true
 VignetteBuilder: knitr
+Encoding: UTF-8
+Language: en-US
 Imports:
     httr (>= 1.2.0),
     jsonlite (>= 1.0),
@@ -20,4 +22,4 @@ Suggests:
     roxygen2 (>= 6.0.1),
     knitr,
     testthat
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
