@@ -8,8 +8,8 @@ warnings_are_errors: false
 before_install:
 - ./download_etcd.sh 3.3.0
 
-r_github_packages:
-- jimhester/covr
+r_binary_packages:
+- covr
 
 after_success:
 - Rscript -e 'covr::codecov()'
